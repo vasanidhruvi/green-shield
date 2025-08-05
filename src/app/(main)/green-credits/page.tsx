@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Award, Briefcase, Download, Feather, Handshake, Sprout, Zap } from 'lucide-react'
+import { Award, Briefcase, Download, Feather, Handshake, Sprout, Zap, ShieldCheck, FileText, Building2 } from 'lucide-react'
 import { InteractiveCard } from '@/components/ui/interactive-card'
 import Image from 'next/image'
 
@@ -132,6 +132,44 @@ export default function GreenCreditsPage() {
                     <CardFooter>
                          <Button variant="link" className="p-0 text-accent-foreground items-center gap-1">Learn more <Download className="w-4 h-4" /></Button>
                     </CardFooter>
+                </Card>
+            </InteractiveCard>
+             <InteractiveCard>
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="font-headline">Verification and Reporting</CardTitle>
+                        <CardDescription>Ensuring your actions have a real, verifiable impact.</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        <div className="flex items-start gap-4 p-3 bg-background/50 rounded-lg">
+                            <Building2 className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
+                            <div>
+                                <h3 className="font-semibold">Official Collaboration</h3>
+                                <p className="text-sm text-muted-foreground">We are exploring collaborations with MoEFCC, BEE, and state SDAs to pilot integrations into the national Green Credit reporting pipelines.</p>
+                            </div>
+                        </div>
+                        <div className="flex items-start gap-4 p-3 bg-background/50 rounded-lg">
+                            <ShieldCheck className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
+                            <div>
+                                <h3 className="font-semibold">Standardized Verification</h3>
+                                <p className="text-sm text-muted-foreground">Our credit verification flow is designed to align with the entry criteria for voluntary carbon project registration under the Carbon Credit Trading Scheme (CCTS).</p>
+                            </div>
+                        </div>
+                        <div className="flex items-start gap-4 p-3 bg-background/50 rounded-lg">
+                            <Handshake className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
+                            <div>
+                                <h3 className="font-semibold">Grassroots Engagement</h3>
+                                <p className="text-sm text-muted-foreground">We engage with local environmental NGOs and cooperative bodies to validate grassroots actions and ensure community impact.</p>
+                            </div>
+                        </div>
+                         <div className="flex items-start gap-4 p-3 bg-background/50 rounded-lg">
+                            <FileText className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
+                            <div>
+                                <h3 className="font-semibold">Official Documentation</h3>
+                                <p className="text-sm text-muted-foreground">We provide template dashboards and reports that individuals and SMEs can use as part of their official documentation for sustainability schemes.</p>
+                            </div>
+                        </div>
+                    </CardContent>
                 </Card>
             </InteractiveCard>
         </div>
