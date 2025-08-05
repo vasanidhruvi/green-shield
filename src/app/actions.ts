@@ -15,7 +15,7 @@ const formSchema = z.object({
 
 export type FormState = {
   message: string;
-  tips?: string[];
+  plan?: PersonalizedEcoTipsOutput;
   errors?: {
     lifestyle?: string[];
     location?: string[];
@@ -42,10 +42,10 @@ export async function generateTips(
 
   try {
     const result: PersonalizedEcoTipsOutput = await getPersonalizedEcoTips(validatedFields.data);
-    if (result.tips && result.tips.length > 0) {
-      return { message: 'Here are your personalized eco-tips!', tips: result.tips, errors: {} };
+    if (result.actionSteps && result.actionSteps.length > 0) {
+      return { message: 'Success!', plan: result, errors: {} };
     } else {
-      return { message: 'Could not generate tips based on your input. Please try a different description.' };
+      return { message: 'Could not generate a plan based on your input. Please try a different description.' };
     }
   } catch (e) {
     console.error(e);

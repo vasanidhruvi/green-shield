@@ -3,7 +3,7 @@
 /**
  * @fileOverview Personalized eco-tips AI agent.
  *
- * - getPersonalizedEcoTips - A function that provides personalized eco-tips.
+ * - getPersonalizedEcoTips - A function that provides a personalized eco-action plan.
  * - PersonalizedEcoTipsInput - The input type for the getPersonalizedEcoTips function.
  * - PersonalizedEcoTipsOutput - The return type for the getPersonalizedEcoTips function.
  */
@@ -20,8 +20,17 @@ const PersonalizedEcoTipsInputSchema = z.object({
 });
 export type PersonalizedEcoTipsInput = z.infer<typeof PersonalizedEcoTipsInputSchema>;
 
+const ActionStepSchema = z.object({
+    title: z.string().describe("A short, catchy title for the action step."),
+    description: z.string().describe("A detailed description of the action step and why it's beneficial."),
+    category: z.enum(["Transport", "Food", "Home", "Shopping", "Community"]).describe("The category of the tip."),
+    difficulty: z.enum(["Easy", "Medium", "Hard"]).describe("The difficulty level of implementing this step.")
+});
+
 const PersonalizedEcoTipsOutputSchema = z.object({
-  tips: z.array(z.string()).describe('A list of personalized eco-tips.'),
+  planTitle: z.string().describe("A creative and inspiring title for the user's personalized eco-plan."),
+  introduction: z.string().describe("A brief, encouraging introduction to the action plan."),
+  actionSteps: z.array(ActionStepSchema).describe('A list of personalized action steps.'),
 });
 export type PersonalizedEcoTipsOutput = z.infer<typeof PersonalizedEcoTipsOutputSchema>;
 
@@ -33,7 +42,15 @@ const prompt = ai.definePrompt({
   name: 'personalizedEcoTipsPrompt',
   input: {schema: PersonalizedEcoTipsInputSchema},
   output: {schema: PersonalizedEcoTipsOutputSchema},
-  prompt: `You are an AI assistant designed to provide personalized eco-tips to users based on their lifestyle, location and regional climate issues.\n\nConsider the user's lifestyle, spending habits, mobility, location, and the climate issues of their region to generate personalized and actionable eco-tips. The tips should be easy to implement in their daily lives.\n\nLifestyle: {{{lifestyle}}}\nLocation: {{{location}}}\nClimate Issues: {{{climateIssues}}}\n\nTips:
+  prompt: `You are an AI assistant designed to create a personalized "Eco-Action Plan" for users based on their lifestyle, location, and regional climate issues.
+
+Generate a creative and inspiring plan with actionable, personalized steps. Each step should be categorized and have a difficulty rating.
+
+The plan should be tailored to the user's specific context.
+
+Lifestyle: {{{lifestyle}}}
+Location: {{{location}}}
+Climate Issues: {{{climateIssues}}}
 `,
 });
 
