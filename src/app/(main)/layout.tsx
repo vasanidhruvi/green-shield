@@ -3,7 +3,10 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, Recycle, Sparkles, Trophy, Users, Leaf, Award, PlusCircle } from "lucide-react"
+import { LayoutDashboard, Recycle, Sparkles, Trophy, Users, Leaf, Award, PlusCircle, ChevronDown } from "lucide-react"
+import { AnimatePresence, motion } from "framer-motion"
+import { cn } from "@/lib/utils"
+
 
 import {
   SidebarProvider,
@@ -16,6 +19,9 @@ import {
   SidebarFooter,
   SidebarTrigger,
   SidebarInset,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/logo"
@@ -25,8 +31,9 @@ import { Separator } from "@/components/ui/separator"
 import { User, LogOut } from "lucide-react"
 
 const navItems = [
-  { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
-  { href: "/log-activity", icon: PlusCircle, label: "Log Activity" },
+  { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard", subItems: [
+      { href: "/log-activity", icon: PlusCircle, label: "Log Activity" },
+  ] },
   { href: "/challenges", icon: Trophy, label: "Challenges" },
   { href: "/green-credits", icon: Award, label: "Green Credits" },
   { href: "/offsets", icon: Recycle, label: "Offsets" },
@@ -36,6 +43,21 @@ const navItems = [
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [openSubmenus, setOpenSubmenus] = React.useState<Record<string, boolean>>({
+      "/dashboard": pathname.startsWith('/dashboard') || pathname.startsWith('/log-activity')
+  });
+
+  const toggleSubmenu = (href: string) => {
+    setOpenSubmenus(prev => ({ ...prev, [href]: !prev[href] }));
+  };
+
+  React.useEffect(() => {
+    // If the pathname changes, make sure the correct submenu is open
+    const currentParent = navItems.find(item => item.subItems?.some(sub => pathname.startsWith(sub.href)));
+    if (currentParent) {
+        setOpenSubmenus(prev => ({...prev, [currentParent.href]: true}));
+    }
+  }, [pathname]);
 
   return (
     <SidebarProvider>
@@ -55,15 +77,54 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
           <SidebarMenu>
             {navItems.map((item) => (
               <SidebarMenuItem key={item.href}>
-                <Link href={item.href}>
-                  <SidebarMenuButton
-                    isActive={pathname.startsWith(item.href)}
-                    tooltip={item.label}
-                  >
-                    <item.icon />
-                    <span>{item.label}</span>
-                  </SidebarMenuButton>
-                </Link>
+                 {item.subItems ? (
+                    <>
+                        <SidebarMenuButton
+                            onClick={() => toggleSubmenu(item.href)}
+                            isActive={pathname.startsWith(item.href)}
+                            tooltip={item.label}
+                        >
+                            <item.icon />
+                            <span>{item.label}</span>
+                            <ChevronDown className={cn("ml-auto h-4 w-4 transition-transform", openSubmenus[item.href] && "rotate-180")}/>
+                        </SidebarMenuButton>
+                        <AnimatePresence>
+                        {openSubmenus[item.href] && (
+                             <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                style={{ overflow: 'hidden' }}
+                             >
+                                <SidebarMenuSub>
+                                {item.subItems.map((subItem) => (
+                                    <SidebarMenuSubItem key={subItem.href}>
+                                        <Link href={subItem.href}>
+                                            <SidebarMenuSubButton
+                                                isActive={pathname.startsWith(subItem.href)}
+                                            >
+                                                <subItem.icon />
+                                                <span>{subItem.label}</span>
+                                            </SidebarMenuSubButton>
+                                        </Link>
+                                    </SidebarMenuSubItem>
+                                ))}
+                                </SidebarMenuSub>
+                             </motion.div>
+                        )}
+                        </AnimatePresence>
+                    </>
+                 ) : (
+                    <Link href={item.href}>
+                        <SidebarMenuButton
+                            isActive={pathname.startsWith(item.href)}
+                            tooltip={item.label}
+                        >
+                            <item.icon />
+                            <span>{item.label}</span>
+                        </SidebarMenuButton>
+                    </Link>
+                 )}
               </SidebarMenuItem>
             ))}
           </SidebarMenu>

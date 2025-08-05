@@ -198,11 +198,6 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent className="flex flex-col gap-3">
                 <Button asChild variant="outline" className="justify-start">
-                  <Link href="/log-activity">
-                    <Plus className="mr-2" /> Log a new activity
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" className="justify-start">
                   <Link href="/challenges">
                     <Zap className="mr-2" /> Start a new challenge
                   </Link>
