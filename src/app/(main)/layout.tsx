@@ -42,7 +42,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 <Logo />
             </div>
             <div className="hidden group-data-[collapsible=icon]:block">
-              <Leaf className="h-6 w-6 text-primary icon-3d"/>
+              <Leaf className="h-6 w-6 text-primary"/>
             </div>
             <SidebarTrigger className="group-data-[collapsible=icon]:hidden" />
           </div>
@@ -51,12 +51,12 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
           <SidebarMenu>
             {navItems.map((item) => (
               <SidebarMenuItem key={item.href}>
-                <Link href={item.href} legacyBehavior passHref>
+                <Link href={item.href}>
                   <SidebarMenuButton
                     isActive={pathname.startsWith(item.href)}
                     tooltip={item.label}
                   >
-                    <item.icon className="icon-3d" />
+                    <item.icon />
                     <span>{item.label}</span>
                   </SidebarMenuButton>
                 </Link>
