@@ -197,6 +197,11 @@ export default function DashboardPage() {
                 <CardTitle className="font-headline">Quick Actions</CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col gap-3">
+                 <Button asChild variant="outline" className="justify-start">
+                  <Link href="/log-activity">
+                    <Plus className="mr-2" /> Log an activity
+                  </Link>
+                </Button>
                 <Button asChild variant="outline" className="justify-start">
                   <Link href="/challenges">
                     <Zap className="mr-2" /> Start a new challenge

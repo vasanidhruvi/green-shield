@@ -31,9 +31,7 @@ import { Separator } from "@/components/ui/separator"
 import { User, LogOut } from "lucide-react"
 
 const navItems = [
-  { href: "/dashboard", icon: Home, label: "Home", subItems: [
-      { href: "/log-activity", icon: PlusCircle, label: "Log Activity" },
-  ] },
+  { href: "/dashboard", icon: Home, label: "Home" },
   { href: "/challenges", icon: Trophy, label: "Challenges" },
   { href: "/green-credits", icon: Award, label: "Green Credits" },
   { href: "/offsets", icon: Recycle, label: "Offsets" },
@@ -43,9 +41,7 @@ const navItems = [
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [openSubmenus, setOpenSubmenus] = React.useState<Record<string, boolean>>({
-      "/dashboard": pathname.startsWith('/dashboard') || pathname.startsWith('/log-activity')
-  });
+  const [openSubmenus, setOpenSubmenus] = React.useState<Record<string, boolean>>({});
 
   const toggleSubmenu = (href: string) => {
     setOpenSubmenus(prev => ({ ...prev, [href]: !prev[href] }));
@@ -53,7 +49,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 
   React.useEffect(() => {
     // If the pathname changes, make sure the correct submenu is open
-    const currentParent = navItems.find(item => item.subItems?.some(sub => pathname.startsWith(sub.href)));
+    const currentParent = navItems.find(item => (item as any).subItems?.some((sub: any) => pathname.startsWith(sub.href)));
     if (currentParent) {
         setOpenSubmenus(prev => ({...prev, [currentParent.href]: true}));
     }
@@ -75,13 +71,13 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>
-            {navItems.map((item) => (
+            {navItems.map((item: any) => (
               <SidebarMenuItem key={item.href}>
                  {item.subItems ? (
                     <>
                         <SidebarMenuButton
                             onClick={() => toggleSubmenu(item.href)}
-                            isActive={pathname.startsWith(item.href)}
+                            isActive={pathname.startsWith(item.href) || item.subItems.some((sub: any) => pathname.startsWith(sub.href))}
                             tooltip={item.label}
                         >
                             <item.icon />
@@ -97,7 +93,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                                 style={{ overflow: 'hidden' }}
                              >
                                 <SidebarMenuSub>
-                                {item.subItems.map((subItem) => (
+                                {item.subItems.map((subItem: any) => (
                                     <SidebarMenuSubItem key={subItem.href}>
                                         <Link href={subItem.href}>
                                             <SidebarMenuSubButton
