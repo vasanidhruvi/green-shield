@@ -90,7 +90,7 @@ export function EcoTipsClient() {
             <Card className="bg-primary/5 border-primary/20">
               <CardHeader>
                   <div className="flex items-center gap-3">
-                      <PartyPopper className="w-8 h-8 text-primary"/>
+                      <PartyPopper className="w-8 h-8 text-primary icon-3d"/>
                       <div>
                           <CardTitle className="text-primary font-headline">{state.message}</CardTitle>
                           <CardDescription>Here are some ideas to get you started on your eco-journey.</CardDescription>
@@ -103,7 +103,7 @@ export function EcoTipsClient() {
                           <AccordionItem value={`item-${index}`} key={index}>
                               <AccordionTrigger>
                                   <div className="flex items-center gap-2">
-                                      <ListChecks className="w-4 h-4 text-primary" />
+                                      <ListChecks className="w-4 h-4 text-primary icon-3d" />
                                       <span>Tip #{index + 1}</span>
                                   </div>
                               </AccordionTrigger>
@@ -117,7 +117,7 @@ export function EcoTipsClient() {
         ) : (
             <InteractiveCard>
                 <Card className="flex flex-col items-center justify-center h-full text-center p-8 bg-accent/30 border-dashed">
-                    <Lightbulb className="w-12 h-12 text-muted-foreground mb-4" />
+                    <Lightbulb className="w-12 h-12 text-muted-foreground mb-4 icon-3d" />
                     <h3 className="text-lg font-semibold text-muted-foreground font-headline">Your tips will appear here</h3>
                     <p className="text-sm text-muted-foreground">Fill out the form to get personalized recommendations from our AI assistant.</p>
                 </Card>

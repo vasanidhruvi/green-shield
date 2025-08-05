@@ -41,7 +41,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 <Logo />
             </div>
             <div className="hidden group-data-[collapsible=icon]:block">
-              <Leaf className="h-6 w-6 text-primary"/>
+              <Leaf className="h-6 w-6 text-primary icon-3d"/>
             </div>
             <SidebarTrigger className="group-data-[collapsible=icon]:hidden" />
           </div>
@@ -55,7 +55,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                     isActive={pathname.startsWith(item.href)}
                     tooltip={item.label}
                   >
-                    <item.icon />
+                    <item.icon className="icon-3d" />
                     <span>{item.label}</span>
                   </SidebarMenuButton>
                 </Link>

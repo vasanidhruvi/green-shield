@@ -72,15 +72,15 @@ export default function CommunityPage() {
                             </CardContent>
                             <CardFooter className="flex justify-start gap-6 text-muted-foreground">
                                 <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
-                                    <Heart className="h-4 w-4" />
+                                    <Heart className="h-4 w-4 icon-3d" />
                                     <span>{item.likes}</span>
                                 </Button>
                                 <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
-                                    <MessageSquare className="h-4 w-4" />
+                                    <MessageSquare className="h-4 w-4 icon-3d" />
                                     <span>{item.comments}</span>
                                 </Button>
                                  <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
-                                    <Repeat className="h-4 w-4" />
+                                    <Repeat className="h-4 w-4 icon-3d" />
                                     <span>Share</span>
                                 </Button>
                             </CardFooter>

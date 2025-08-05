@@ -43,7 +43,7 @@ export default function ChallengesPage() {
                                 <Card>
                                     <CardHeader>
                                         <div className="flex items-center gap-3">
-                                            <challenge.icon className="w-8 h-8 text-primary" />
+                                            <challenge.icon className="w-8 h-8 text-primary icon-3d" />
                                             <div>
                                                 <CardTitle className="font-headline">{challenge.title}</CardTitle>
                                                 <CardDescription>{challenge.description}</CardDescription>
@@ -70,7 +70,7 @@ export default function ChallengesPage() {
                                 <Card className="opacity-70">
                                     <CardHeader>
                                         <div className="flex items-center gap-3">
-                                            <challenge.icon className="w-8 h-8 text-muted-foreground" />
+                                            <challenge.icon className="w-8 h-8 text-muted-foreground icon-3d" />
                                             <div>
                                                 <CardTitle className="font-headline">{challenge.title}</CardTitle>
                                                 <CardDescription>{challenge.description}</CardDescription>

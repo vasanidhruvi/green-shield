@@ -48,7 +48,7 @@ export default function OffsetsPage() {
                                     <Image src={project.image} alt={project.title} fill style={{ objectFit: 'cover' }} data-ai-hint={project.imageHint}/>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <project.icon className="w-8 h-8 text-primary mt-1" />
+                                    <project.icon className="w-8 h-8 text-primary mt-1 icon-3d" />
                                     <div>
                                         <CardTitle className="font-headline">{project.title}</CardTitle>
                                         <CardDescription>{project.description}</CardDescription>
