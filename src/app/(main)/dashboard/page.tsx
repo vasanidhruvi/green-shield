@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react';
+import Link from 'next/link';
 import {
   Card,
   CardContent,
@@ -196,14 +197,20 @@ export default function DashboardPage() {
                 <CardTitle className="font-headline">Quick Actions</CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col gap-3">
-                <Button variant="outline" className="justify-start">
-                  <Plus className="mr-2" /> Log a new activity
+                <Button asChild variant="outline" className="justify-start">
+                  <Link href="/log-activity">
+                    <Plus className="mr-2" /> Log a new activity
+                  </Link>
                 </Button>
-                <Button variant="outline" className="justify-start">
-                  <Zap className="mr-2" /> Start a new challenge
+                <Button asChild variant="outline" className="justify-start">
+                  <Link href="/challenges">
+                    <Zap className="mr-2" /> Start a new challenge
+                  </Link>
                 </Button>
-                <Button variant="outline" className="justify-start">
-                  <Droplets className="mr-2" /> Purchase offsets
+                <Button asChild variant="outline" className="justify-start">
+                  <Link href="/offsets">
+                    <Droplets className="mr-2" /> Purchase offsets
+                  </Link>
                 </Button>
               </CardContent>
             </Card>

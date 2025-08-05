@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, Recycle, Sparkles, Trophy, Users, Leaf, Award } from "lucide-react"
+import { LayoutDashboard, Recycle, Sparkles, Trophy, Users, Leaf, Award, PlusCircle } from "lucide-react"
 
 import {
   SidebarProvider,
@@ -26,6 +26,7 @@ import { User, LogOut } from "lucide-react"
 
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+  { href: "/log-activity", icon: PlusCircle, label: "Log Activity" },
   { href: "/challenges", icon: Trophy, label: "Challenges" },
   { href: "/green-credits", icon: Award, label: "Green Credits" },
   { href: "/offsets", icon: Recycle, label: "Offsets" },
