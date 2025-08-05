@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { format } from "date-fns"
-import { Calendar as CalendarIcon, Car, Beef, Home, ShoppingBag, Leaf, Zap, ArrowLeft } from "lucide-react"
+import { Calendar as CalendarIcon, Car, Beef, Home, ShoppingBag, Leaf, Zap, ArrowLeft, BotMessageSquare } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -104,50 +104,49 @@ export default function LogActivityPage() {
                 <CardDescription>Fill in the details of the sustainable action you took.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="category"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Category</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select a category" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {activityCategories.map((cat) => (
-                            <SelectItem key={cat.value} value={cat.value}>
-                              <div className="flex items-center gap-2">
-                                <cat.icon className="w-4 h-4" />
-                                <span>{cat.label}</span>
-                              </div>
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="category"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Category</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select a category" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {activityCategories.map((cat) => (
+                                <SelectItem key={cat.value} value={cat.value}>
+                                  <div className="flex items-center gap-2">
+                                    <cat.icon className="w-4 h-4 text-muted-foreground" />
+                                    <span>{cat.label}</span>
+                                  </div>
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-                <FormField
-                  control={form.control}
-                  name="title"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Activity Title</FormLabel>
-                      <FormControl>
-                        <Input placeholder="e.g., Cycled to work" {...field} />
-                      </FormControl>
-                      <FormDescription>
-                        A short, descriptive title for your activity.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                    <FormField
+                      control={form.control}
+                      name="title"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Activity Title</FormLabel>
+                          <FormControl>
+                            <Input placeholder="e.g., Cycled to work" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                </div>
                 
                  <FormField
                   control={form.control}
@@ -215,16 +214,21 @@ export default function LogActivityPage() {
                         <FormControl>
                           <Input type="number" placeholder="e.g., 1.2" {...field} />
                         </FormControl>
+                         <FormDescription className="flex items-center gap-1.5 text-xs">
+                           <BotMessageSquare className="w-3.5 h-3.5" />
+                           Need help? We can estimate this for you soon.
+                        </FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
                 </div>
               </CardContent>
-              <CardFooter>
+              <CardFooter className="flex flex-col gap-4">
                 <Button type="submit" className="w-full">
-                  <Zap className="mr-2" /> Log Activity
+                  <Zap className="mr-2" /> Log Activity & Earn Credits
                 </Button>
+                <p className="text-xs text-muted-foreground">Your logged activities contribute to your Green Credits balance.</p>
               </CardFooter>
             </form>
           </Form>
