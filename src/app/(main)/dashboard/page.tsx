@@ -21,6 +21,7 @@ import {
   Plus,
   TreePine,
   ArrowRight,
+  Award,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
@@ -41,6 +42,7 @@ export default function DashboardPage() {
   const [totalFootprint, setTotalFootprint] = React.useState(0);
   const [offsets, setOffsets] = React.useState(0);
   const [challengeStreak, setChallengeStreak] = React.useState(0);
+  const [greenCredits, setGreenCredits] = React.useState(0);
 
   React.useEffect(() => {
     // Generate random data on the client side to avoid hydration mismatch
@@ -54,6 +56,7 @@ export default function DashboardPage() {
     setTotalFootprint(total);
     setOffsets(Math.floor(Math.random() * 100) + 20);
     setChallengeStreak(Math.floor(Math.random() * 30));
+    setGreenCredits(Math.floor(Math.random() * 500) + 50);
   }, []);
 
   const treeGrowth = Math.min((totalFootprint / 1000) * 100, 100) // Example growth logic
@@ -91,12 +94,19 @@ export default function DashboardPage() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
                   <div className="p-4 rounded-lg bg-background/70">
                     <Leaf className="h-6 w-6 text-primary mx-auto mb-2" />
                     <p className="text-2xl font-bold">{totalFootprint} kg</p>
                     <p className="text-xs text-muted-foreground">
                       This Month's CO₂e
+                    </p>
+                  </div>
+                   <div className="p-4 rounded-lg bg-background/70">
+                    <Award className="h-6 w-6 text-yellow-600 mx-auto mb-2" />
+                    <p className="text-2xl font-bold">{greenCredits}</p>
+                    <p className="text-xs text-muted-foreground">
+                      Green Credits
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-background/70">

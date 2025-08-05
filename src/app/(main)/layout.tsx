@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, Recycle, Sparkles, Trophy, Users, Leaf } from "lucide-react"
+import { LayoutDashboard, Recycle, Sparkles, Trophy, Users, Leaf, Award } from "lucide-react"
 
 import {
   SidebarProvider,
@@ -24,6 +24,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/challenges", icon: Trophy, label: "Challenges" },
+  { href: "/green-credits", icon: Award, label: "Green Credits" },
   { href: "/offsets", icon: Recycle, label: "Offsets" },
   { href: "/eco-tips", icon: Sparkles, label: "Eco Tips" },
   { href: "/community", icon: Users, label: "Community" },

@@ -5,13 +5,13 @@ import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Progress } from '@/components/ui/progress'
 import Image from 'next/image'
-import { Leaf, Users, Zap } from 'lucide-react'
+import { Award, Leaf, Users, Zap } from 'lucide-react'
 import { InteractiveCard } from '@/components/ui/interactive-card'
 
 const challenges = [
-    { title: 'Meatless Mondays', description: 'Go vegetarian for one day a week.', progress: 75, icon: Leaf, reward: 'Veggie Badge' },
-    { title: 'Commute Crusader', description: 'Use public transport or cycle to work.', progress: 50, icon: Zap, reward: '20 Points' },
-    { title: 'Thrift Shopper', description: 'Buy one second-hand item instead of new.', progress: 100, completed: true, icon: Users, reward: 'Circular Economy Badge' },
+    { title: 'Meatless Mondays', description: 'Go vegetarian for one day a week.', progress: 75, icon: Leaf, reward: '10 Green Credits' },
+    { title: 'Commute Crusader', description: 'Use public transport or cycle to work.', progress: 50, icon: Zap, reward: '20 Green Credits' },
+    { title: 'Thrift Shopper', description: 'Buy one second-hand item instead of new.', progress: 100, completed: true, icon: Users, reward: '15 Green Credits' },
 ]
 
 const leaderboard = [
@@ -43,7 +43,7 @@ export default function ChallengesPage() {
                                 <Card>
                                     <CardHeader>
                                         <div className="flex items-center gap-3">
-                                            <challenge.icon className="w-8 h-8 text-primary icon-3d" />
+                                            <challenge.icon className="w-8 h-8 text-primary" />
                                             <div>
                                                 <CardTitle className="font-headline">{challenge.title}</CardTitle>
                                                 <CardDescription>{challenge.description}</CardDescription>
@@ -55,7 +55,7 @@ export default function ChallengesPage() {
                                         <p className="text-sm text-muted-foreground mt-2">{challenge.progress}% complete</p>
                                     </CardContent>
                                     <CardFooter className="flex justify-between">
-                                        <Badge variant="outline">{challenge.reward}</Badge>
+                                        <Badge variant="outline" className="flex items-center gap-1"><Award className="w-3 h-3 text-yellow-600" /> {challenge.reward}</Badge>
                                         <Button size="sm">View Details</Button>
                                     </CardFooter>
                                 </Card>
@@ -70,7 +70,7 @@ export default function ChallengesPage() {
                                 <Card className="opacity-70">
                                     <CardHeader>
                                         <div className="flex items-center gap-3">
-                                            <challenge.icon className="w-8 h-8 text-muted-foreground icon-3d" />
+                                            <challenge.icon className="w-8 h-8 text-muted-foreground" />
                                             <div>
                                                 <CardTitle className="font-headline">{challenge.title}</CardTitle>
                                                 <CardDescription>{challenge.description}</CardDescription>
@@ -81,7 +81,7 @@ export default function ChallengesPage() {
                                         <p className="text-sm font-semibold text-primary">Challenge Completed!</p>
                                     </CardContent>
                                      <CardFooter>
-                                        <Badge variant="secondary">{challenge.reward} Earned</Badge>
+                                        <Badge variant="secondary" className="flex items-center gap-1"><Award className="w-3 h-3 text-yellow-600" /> {challenge.reward} Earned</Badge>
                                     </CardFooter>
                                 </Card>
                             </InteractiveCard>
