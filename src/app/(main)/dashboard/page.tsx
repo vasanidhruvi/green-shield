@@ -1,5 +1,6 @@
 'use client'
 
+import * as React from 'react';
 import {
   Card,
   CardContent,
@@ -28,36 +29,33 @@ import {
 } from '@/components/ui/chart'
 import { InteractiveCard } from '@/components/ui/interactive-card'
 
-const footprintData = [
-  { category: 'Transport', value: 186, color: 'hsl(var(--chart-1))', icon: Car },
-  { category: 'Energy', value: 240, color: 'hsl(var(--chart-2))', icon: Home },
-  { category: 'Food', value: 90, color: 'hsl(var(--chart-3))', icon: Beef },
-  { category: 'Goods', value: 138, color: 'hsl(var(--chart-4))', icon: ShoppingBag },
-]
-const chartConfig: ChartConfig = {
-  value: {
-    label: 'CO₂e',
-  },
-  transport: {
-    label: 'Transport',
-    color: 'hsl(var(--chart-1))',
-  },
-  energy: {
-    label: 'Energy',
-    color: 'hsl(var(--chart-2))',
-  },
-  food: {
-    label: 'Food',
-    color: 'hsl(var(--chart-3))',
-  },
-  goods: {
-    label: 'Goods',
-    color: 'hsl(var(--chart-4))',
-  },
-}
+const footprintCategories = [
+  { category: 'Transport', color: 'hsl(var(--chart-1))', icon: Car },
+  { category: 'Energy', color: 'hsl(var(--chart-2))', icon: Home },
+  { category: 'Food', color: 'hsl(var(--chart-3))', icon: Beef },
+  { category: 'Goods', color: 'hsl(var(--chart-4))', icon: ShoppingBag },
+];
 
 export default function DashboardPage() {
-  const totalFootprint = footprintData.reduce((acc, curr) => acc + curr.value, 0)
+  const [footprintData, setFootprintData] = React.useState<any[]>([]);
+  const [totalFootprint, setTotalFootprint] = React.useState(0);
+  const [offsets, setOffsets] = React.useState(0);
+  const [challengeStreak, setChallengeStreak] = React.useState(0);
+
+  React.useEffect(() => {
+    // Generate random data on the client side to avoid hydration mismatch
+    const randomData = footprintCategories.map(item => ({
+      ...item,
+      value: Math.floor(Math.random() * 200) + 50,
+    }));
+    const total = randomData.reduce((acc, curr) => acc + curr.value, 0);
+    
+    setFootprintData(randomData);
+    setTotalFootprint(total);
+    setOffsets(Math.floor(Math.random() * 100) + 20);
+    setChallengeStreak(Math.floor(Math.random() * 30));
+  }, []);
+
   const treeGrowth = Math.min((totalFootprint / 1000) * 100, 100) // Example growth logic
 
   return (
@@ -103,14 +101,14 @@ export default function DashboardPage() {
                   </div>
                   <div className="p-4 rounded-lg bg-background/70">
                     <Droplets className="h-6 w-6 text-blue-500 mx-auto mb-2" />
-                    <p className="text-2xl font-bold">50 kg</p>
+                    <p className="text-2xl font-bold">{offsets} kg</p>
                     <p className="text-xs text-muted-foreground">
                       Offsets Purchased
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-background/70">
                     <Zap className="h-6 w-6 text-yellow-500 mx-auto mb-2" />
-                    <p className="text-2xl font-bold">12 Days</p>
+                    <p className="text-2xl font-bold">{challengeStreak} Days</p>
                     <p className="text-xs text-muted-foreground">
                       Challenge Streak
                     </p>
@@ -171,7 +169,7 @@ export default function DashboardPage() {
                                 <span className="text-sm font-medium">{item.category}</span>
                                 <span className="text-sm font-bold">{item.value} kg</span>
                             </div>
-                            <Progress value={(item.value / totalFootprint) * 100} className="h-1.5 mt-1" style={{ '--tw-bg-primary': item.color } as React.CSSProperties} />
+                            <Progress value={totalFootprint > 0 ? (item.value / totalFootprint) * 100 : 0} className="h-1.5 mt-1" style={{ '--tw-bg-primary': item.color } as React.CSSProperties} />
                         </div>
                          <ArrowRight className="w-4 h-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
                     </div>
