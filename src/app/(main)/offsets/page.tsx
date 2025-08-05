@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import { Droplets, Sprout, Wind } from 'lucide-react'
+import { InteractiveCard } from '@/components/ui/interactive-card'
 
 const offsetProjects = [
     {
@@ -38,44 +39,48 @@ export default function OffsetsPage() {
                 <p className="text-muted-foreground">Neutralize your carbon footprint by supporting certified climate projects.</p>
             </header>
             
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3" style={{ perspective: '1500px' }}>
                 {offsetProjects.map((project) => (
-                    <Card key={project.title} className="flex flex-col">
-                        <CardHeader>
-                            <div className="relative h-40 w-full rounded-t-lg overflow-hidden mb-4">
-                                <Image src={project.image} alt={project.title} fill style={{ objectFit: 'cover' }} data-ai-hint={project.imageHint}/>
-                            </div>
-                            <div className="flex items-start gap-4">
-                                <project.icon className="w-8 h-8 text-primary mt-1" />
-                                <div>
-                                    <CardTitle className="font-headline">{project.title}</CardTitle>
-                                    <CardDescription>{project.description}</CardDescription>
+                    <InteractiveCard key={project.title}>
+                        <Card className="flex flex-col h-full">
+                            <CardHeader>
+                                <div className="relative h-40 w-full rounded-t-lg overflow-hidden mb-4">
+                                    <Image src={project.image} alt={project.title} fill style={{ objectFit: 'cover' }} data-ai-hint={project.imageHint}/>
                                 </div>
-                            </div>
-                        </CardHeader>
-                        <CardContent className="flex-grow">
-                            {/* Can add more details here */}
-                        </CardContent>
-                        <CardFooter className="flex justify-between items-center">
-                            <div className="text-lg font-bold text-primary">${project.pricePerTon.toFixed(2)} <span className="text-sm font-normal text-muted-foreground">/ ton CO₂e</span></div>
-                            <Button>Offset Now</Button>
-                        </CardFooter>
-                    </Card>
+                                <div className="flex items-start gap-4">
+                                    <project.icon className="w-8 h-8 text-primary mt-1" />
+                                    <div>
+                                        <CardTitle className="font-headline">{project.title}</CardTitle>
+                                        <CardDescription>{project.description}</CardDescription>
+                                    </div>
+                                </div>
+                            </CardHeader>
+                            <CardContent className="flex-grow">
+                                {/* Can add more details here */}
+                            </CardContent>
+                            <CardFooter className="flex justify-between items-center">
+                                <div className="text-lg font-bold text-primary">${project.pricePerTon.toFixed(2)} <span className="text-sm font-normal text-muted-foreground">/ ton CO₂e</span></div>
+                                <Button>Offset Now</Button>
+                            </CardFooter>
+                        </Card>
+                    </InteractiveCard>
                 ))}
             </div>
 
-            <Card className="bg-accent/50">
-                <CardHeader>
-                    <CardTitle className="font-headline">What is Carbon Offsetting?</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2 text-accent-foreground">
-                    <p>Carbon offsetting is a way to compensate for your emissions by funding an equivalent carbon dioxide saving elsewhere.</p>
-                    <p>Our projects are verified by internationally recognized standards to ensure they deliver real, permanent, and additional climate benefits.</p>
-                </CardContent>
-                <CardFooter>
-                    <Button variant="link" className="p-0 text-accent-foreground">Learn More</Button>
-                </CardFooter>
-            </Card>
+            <InteractiveCard>
+                <Card className="bg-accent/50">
+                    <CardHeader>
+                        <CardTitle className="font-headline">What is Carbon Offsetting?</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-2 text-accent-foreground">
+                        <p>Carbon offsetting is a way to compensate for your emissions by funding an equivalent carbon dioxide saving elsewhere.</p>
+                        <p>Our projects are verified by internationally recognized standards to ensure they deliver real, permanent, and additional climate benefits.</p>
+                    </CardContent>
+                    <CardFooter>
+                        <Button variant="link" className="p-0 text-accent-foreground">Learn More</Button>
+                    </CardFooter>
+                </Card>
+            </InteractiveCard>
         </div>
     )
 }

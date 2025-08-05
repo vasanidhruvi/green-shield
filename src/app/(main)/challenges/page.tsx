@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Progress } from '@/components/ui/progress'
 import Image from 'next/image'
 import { Leaf, Users, Zap } from 'lucide-react'
+import { InteractiveCard } from '@/components/ui/interactive-card'
 
 const challenges = [
     { title: 'Meatless Mondays', description: 'Go vegetarian for one day a week.', progress: 75, icon: Leaf, reward: 'Veggie Badge' },
@@ -36,75 +37,81 @@ export default function ChallengesPage() {
                     <TabsTrigger value="leaderboard">Leaderboard</TabsTrigger>
                 </TabsList>
                 <TabsContent value="active">
-                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3" style={{ perspective: '1500px' }}>
                         {challenges.filter(c => !c.completed).map((challenge) => (
-                            <Card key={challenge.title}>
-                                <CardHeader>
-                                    <div className="flex items-center gap-3">
-                                        <challenge.icon className="w-8 h-8 text-primary" />
-                                        <div>
-                                            <CardTitle className="font-headline">{challenge.title}</CardTitle>
-                                            <CardDescription>{challenge.description}</CardDescription>
+                            <InteractiveCard key={challenge.title}>
+                                <Card>
+                                    <CardHeader>
+                                        <div className="flex items-center gap-3">
+                                            <challenge.icon className="w-8 h-8 text-primary" />
+                                            <div>
+                                                <CardTitle className="font-headline">{challenge.title}</CardTitle>
+                                                <CardDescription>{challenge.description}</CardDescription>
+                                            </div>
                                         </div>
-                                    </div>
-                                </CardHeader>
-                                <CardContent>
-                                    <Progress value={challenge.progress} className="w-full" />
-                                    <p className="text-sm text-muted-foreground mt-2">{challenge.progress}% complete</p>
-                                </CardContent>
-                                <CardFooter className="flex justify-between">
-                                    <Badge variant="outline">{challenge.reward}</Badge>
-                                    <Button size="sm">View Details</Button>
-                                </CardFooter>
-                            </Card>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <Progress value={challenge.progress} className="w-full" />
+                                        <p className="text-sm text-muted-foreground mt-2">{challenge.progress}% complete</p>
+                                    </CardContent>
+                                    <CardFooter className="flex justify-between">
+                                        <Badge variant="outline">{challenge.reward}</Badge>
+                                        <Button size="sm">View Details</Button>
+                                    </CardFooter>
+                                </Card>
+                            </InteractiveCard>
                         ))}
                     </div>
                 </TabsContent>
                 <TabsContent value="completed">
-                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3" style={{ perspective: '1500px' }}>
                          {challenges.filter(c => c.completed).map((challenge) => (
-                            <Card key={challenge.title} className="opacity-70">
-                                <CardHeader>
-                                    <div className="flex items-center gap-3">
-                                        <challenge.icon className="w-8 h-8 text-muted-foreground" />
-                                        <div>
-                                            <CardTitle className="font-headline">{challenge.title}</CardTitle>
-                                            <CardDescription>{challenge.description}</CardDescription>
+                            <InteractiveCard key={challenge.title}>
+                                <Card className="opacity-70">
+                                    <CardHeader>
+                                        <div className="flex items-center gap-3">
+                                            <challenge.icon className="w-8 h-8 text-muted-foreground" />
+                                            <div>
+                                                <CardTitle className="font-headline">{challenge.title}</CardTitle>
+                                                <CardDescription>{challenge.description}</CardDescription>
+                                            </div>
                                         </div>
-                                    </div>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="text-sm font-semibold text-primary">Challenge Completed!</p>
-                                </CardContent>
-                                 <CardFooter>
-                                    <Badge variant="secondary">{challenge.reward} Earned</Badge>
-                                </CardFooter>
-                            </Card>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <p className="text-sm font-semibold text-primary">Challenge Completed!</p>
+                                    </CardContent>
+                                     <CardFooter>
+                                        <Badge variant="secondary">{challenge.reward} Earned</Badge>
+                                    </CardFooter>
+                                </Card>
+                            </InteractiveCard>
                         ))}
                     </div>
                 </TabsContent>
                 <TabsContent value="leaderboard">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className="font-headline">Community Leaderboard</CardTitle>
-                            <CardDescription>See how you stack up against the community.</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <ul className="space-y-4">
-                                {leaderboard.map((user, index) => (
-                                    <li key={user.name} className={`flex items-center gap-4 p-2 rounded-lg ${user.isCurrentUser ? 'bg-accent' : ''}`}>
-                                        <span className="text-lg font-bold text-muted-foreground w-6">{index + 1}</span>
-                                        <Avatar>
-                                            <AvatarImage src={user.avatar} data-ai-hint="people portrait" />
-                                            <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-                                        </Avatar>
-                                        <span className={`font-medium ${user.isCurrentUser ? 'font-bold' : ''}`}>{user.name}</span>
-                                        <span className="ml-auto font-semibold text-primary">{user.score} pts</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </CardContent>
-                    </Card>
+                    <InteractiveCard>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle className="font-headline">Community Leaderboard</CardTitle>
+                                <CardDescription>See how you stack up against the community.</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <ul className="space-y-4">
+                                    {leaderboard.map((user, index) => (
+                                        <li key={user.name} className={`flex items-center gap-4 p-2 rounded-lg ${user.isCurrentUser ? 'bg-accent' : ''}`}>
+                                            <span className="text-lg font-bold text-muted-foreground w-6">{index + 1}</span>
+                                            <Avatar>
+                                                <AvatarImage src={user.avatar} data-ai-hint="people portrait" />
+                                                <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                                            </Avatar>
+                                            <span className={`font-medium ${user.isCurrentUser ? 'font-bold' : ''}`}>{user.name}</span>
+                                            <span className="ml-auto font-semibold text-primary">{user.score} pts</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </CardContent>
+                        </Card>
+                    </InteractiveCard>
                 </TabsContent>
             </Tabs>
         </div>

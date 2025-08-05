@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import { Heart, MessageSquare, Repeat } from 'lucide-react'
+import { InteractiveCard } from '@/components/ui/interactive-card'
 
 const feedItems = [
     {
@@ -46,43 +47,45 @@ export default function CommunityPage() {
                 <p className="text-muted-foreground">See how the ClimateSync community is making a difference.</p>
             </header>
             
-            <div className="max-w-2xl mx-auto w-full space-y-6">
+            <div className="max-w-2xl mx-auto w-full space-y-6" style={{ perspective: '1500px' }}>
                 {feedItems.map((item, index) => (
-                    <Card key={index}>
-                        <CardHeader className="flex flex-row gap-3">
-                             <Avatar>
-                                <AvatarImage src={item.user.avatar} data-ai-hint="people portrait"/>
-                                <AvatarFallback>{item.user.name.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                            <div>
-                                <CardTitle className="text-base font-bold">{item.user.name}</CardTitle>
-                                <CardDescription>{item.timestamp}</CardDescription>
-                            </div>
-                            {item.badge && <Badge variant="secondary" className="ml-auto">{item.badge}</Badge>}
-                        </CardHeader>
-                        <CardContent>
-                            <p className="mb-4">{item.content}</p>
-                            {item.image && (
-                                <div className="relative h-64 w-full rounded-lg overflow-hidden">
-                                    <Image src={item.image} alt="Feed item image" fill style={{ objectFit: 'cover' }} data-ai-hint={item.imageHint} />
+                    <InteractiveCard key={index}>
+                        <Card>
+                            <CardHeader className="flex flex-row gap-3">
+                                 <Avatar>
+                                    <AvatarImage src={item.user.avatar} data-ai-hint="people portrait"/>
+                                    <AvatarFallback>{item.user.name.charAt(0)}</AvatarFallback>
+                                </Avatar>
+                                <div>
+                                    <CardTitle className="text-base font-bold">{item.user.name}</CardTitle>
+                                    <CardDescription>{item.timestamp}</CardDescription>
                                 </div>
-                            )}
-                        </CardContent>
-                        <CardFooter className="flex justify-start gap-6 text-muted-foreground">
-                            <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
-                                <Heart className="h-4 w-4" />
-                                <span>{item.likes}</span>
-                            </Button>
-                            <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
-                                <MessageSquare className="h-4 w-4" />
-                                <span>{item.comments}</span>
-                            </Button>
-                             <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
-                                <Repeat className="h-4 w-4" />
-                                <span>Share</span>
-                            </Button>
-                        </CardFooter>
-                    </Card>
+                                {item.badge && <Badge variant="secondary" className="ml-auto">{item.badge}</Badge>}
+                            </CardHeader>
+                            <CardContent>
+                                <p className="mb-4">{item.content}</p>
+                                {item.image && (
+                                    <div className="relative h-64 w-full rounded-lg overflow-hidden">
+                                        <Image src={item.image} alt="Feed item image" fill style={{ objectFit: 'cover' }} data-ai-hint={item.imageHint} />
+                                    </div>
+                                )}
+                            </CardContent>
+                            <CardFooter className="flex justify-start gap-6 text-muted-foreground">
+                                <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
+                                    <Heart className="h-4 w-4" />
+                                    <span>{item.likes}</span>
+                                </Button>
+                                <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
+                                    <MessageSquare className="h-4 w-4" />
+                                    <span>{item.comments}</span>
+                                </Button>
+                                 <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
+                                    <Repeat className="h-4 w-4" />
+                                    <span>Share</span>
+                                </Button>
+                            </CardFooter>
+                        </Card>
+                    </InteractiveCard>
                 ))}
             </div>
         </div>
