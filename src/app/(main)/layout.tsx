@@ -20,6 +20,9 @@ import {
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/logo"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Separator } from "@/components/ui/separator"
+import { User, LogOut } from "lucide-react"
 
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
@@ -65,16 +68,33 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
-           <div className="flex items-center gap-2">
-              <Avatar className="h-8 w-8">
-                <AvatarImage src="https://placehold.co/100x100" alt="@shadcn" />
-                <AvatarFallback>U</AvatarFallback>
-              </Avatar>
-              <div className="flex flex-col group-data-[collapsible=icon]:hidden">
-                <span className="text-sm font-semibold">User</span>
-                <span className="text-xs text-muted-foreground">user@example.com</span>
-              </div>
-           </div>
+           <Popover>
+            <PopoverTrigger asChild>
+               <div className="flex items-center gap-2 cursor-pointer p-2 rounded-md hover:bg-sidebar-accent">
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src="https://placehold.co/100x100" alt="@shadcn" data-ai-hint="people portrait"/>
+                    <AvatarFallback>U</AvatarFallback>
+                  </Avatar>
+                  <div className="flex flex-col group-data-[collapsible=icon]:hidden">
+                    <span className="text-sm font-semibold">User</span>
+                    <span className="text-xs text-muted-foreground">user@example.com</span>
+                  </div>
+               </div>
+             </PopoverTrigger>
+             <PopoverContent className="w-56 p-2">
+                <div className="flex flex-col gap-1">
+                  <Link href="/profile">
+                    <Button variant="ghost" className="w-full justify-start">
+                        <User className="mr-2"/> Profile
+                    </Button>
+                  </Link>
+                  <Separator />
+                   <Button variant="ghost" className="w-full justify-start text-red-500 hover:text-red-600">
+                        <LogOut className="mr-2"/> Sign Out
+                    </Button>
+                </div>
+             </PopoverContent>
+           </Popover>
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
