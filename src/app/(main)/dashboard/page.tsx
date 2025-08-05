@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
@@ -18,18 +19,13 @@ import {
   ShieldCheck,
   Plus,
   TreePine,
+  ArrowRight,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
   ChartConfig,
-  ChartLegend,
-  ChartLegendContent,
 } from '@/components/ui/chart'
-import { PieChart, Pie, Cell, Tooltip } from 'recharts'
 import { InteractiveCard } from '@/components/ui/interactive-card'
 
 const footprintData = [
@@ -85,7 +81,7 @@ export default function DashboardPage() {
             <Card className="bg-primary/5 border-primary/20 backdrop-blur-sm">
               <CardHeader>
                 <div className="flex items-center gap-4">
-                  <ShieldCheck className="w-10 h-10 text-primary icon-3d" />
+                  <ShieldCheck className="w-10 h-10 text-primary" />
                   <div>
                     <CardTitle className="font-headline text-primary">
                       Your Eco-Hero Status
@@ -99,21 +95,21 @@ export default function DashboardPage() {
               <CardContent>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
                   <div className="p-4 rounded-lg bg-background/70">
-                    <Leaf className="h-6 w-6 text-primary mx-auto mb-2 icon-3d" />
+                    <Leaf className="h-6 w-6 text-primary mx-auto mb-2" />
                     <p className="text-2xl font-bold">{totalFootprint} kg</p>
                     <p className="text-xs text-muted-foreground">
                       This Month's CO₂e
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-background/70">
-                    <Droplets className="h-6 w-6 text-blue-500 mx-auto mb-2 icon-3d" />
+                    <Droplets className="h-6 w-6 text-blue-500 mx-auto mb-2" />
                     <p className="text-2xl font-bold">50 kg</p>
                     <p className="text-xs text-muted-foreground">
                       Offsets Purchased
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-background/70">
-                    <Zap className="h-6 w-6 text-yellow-500 mx-auto mb-2 icon-3d" />
+                    <Zap className="h-6 w-6 text-yellow-500 mx-auto mb-2" />
                     <p className="text-2xl font-bold">12 Days</p>
                     <p className="text-xs text-muted-foreground">
                       Challenge Streak
@@ -135,7 +131,7 @@ export default function DashboardPage() {
               <CardContent className="flex flex-col sm:flex-row items-center gap-6">
                 <div className="relative w-32 h-32 flex items-center justify-center">
                   <TreePine
-                    className="w-24 h-24 text-primary transition-all duration-1000 icon-3d"
+                    className="w-24 h-24 text-primary transition-all duration-1000"
                     style={{
                       opacity: 0.3 + (treeGrowth / 100) * 0.7,
                       transform: `scale(${0.8 + (treeGrowth / 100) * 0.2})`,
@@ -159,48 +155,32 @@ export default function DashboardPage() {
         {/* Side Column */}
         <div className="row-start-1 lg:row-start-auto flex flex-col gap-6">
           <InteractiveCard className="flex-1 flex flex-col">
-            <Card className="flex-1 flex flex-col backdrop-blur-sm">
-              <CardHeader className="items-center pb-0">
-                <CardTitle className="text-base font-headline">
-                  Footprint Breakdown
-                </CardTitle>
+          <Card className="flex-1 flex flex-col backdrop-blur-sm">
+            <CardHeader>
+                <CardTitle className="text-base font-headline">Footprint Breakdown</CardTitle>
                 <CardDescription>Your CO₂e by category</CardDescription>
-              </CardHeader>
-              <CardContent className="flex-1 pb-0">
-                <ChartContainer
-                  config={chartConfig}
-                  className="mx-auto aspect-square max-h-[250px]"
-                >
-                  <PieChart>
-                    <Tooltip
-                      cursor={false}
-                      content={<ChartTooltipContent hideLabel />}
-                    />
-                    <Pie
-                      data={footprintData}
-                      dataKey="value"
-                      nameKey="category"
-                      innerRadius={60}
-                      strokeWidth={5}
-                    >
-                      {footprintData.map((entry, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={entry.color}
-                          className="focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                        />
-                      ))}
-                    </Pie>
-                  </PieChart>
-                </ChartContainer>
-              </CardContent>
-              <CardContent className="mt-auto flex flex-col items-center">
-                <ChartLegend
-                  config={chartConfig}
-                  className="flex-wrap justify-center"
-                />
-              </CardContent>
-            </Card>
+            </CardHeader>
+            <CardContent className="flex-1 flex flex-col gap-4">
+                {footprintData.map((item) => (
+                    <div key={item.category} className="group flex items-center gap-3">
+                        <div className="p-2 rounded-md" style={{ backgroundColor: item.color, opacity: 0.2}}>
+                            <item.icon className="w-5 h-5" style={{ color: item.color }}/>
+                        </div>
+                        <div className="flex-1">
+                            <div className="flex justify-between items-center">
+                                <span className="text-sm font-medium">{item.category}</span>
+                                <span className="text-sm font-bold">{item.value} kg</span>
+                            </div>
+                            <Progress value={(item.value / totalFootprint) * 100} className="h-1.5 mt-1" style={{ '--tw-bg-primary': item.color } as React.CSSProperties} />
+                        </div>
+                         <ArrowRight className="w-4 h-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
+                    </div>
+                ))}
+            </CardContent>
+             <CardFooter>
+                 <Button variant="link" size="sm" className="p-0 text-xs">View Detailed Report</Button>
+            </CardFooter>
+        </Card>
           </InteractiveCard>
           <InteractiveCard>
             <Card className="backdrop-blur-sm">
@@ -209,13 +189,13 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent className="flex flex-col gap-3">
                 <Button variant="outline" className="justify-start">
-                  <Plus className="mr-2 icon-3d" /> Log a new activity
+                  <Plus className="mr-2" /> Log a new activity
                 </Button>
                 <Button variant="outline" className="justify-start">
-                  <Zap className="mr-2 icon-3d" /> Start a new challenge
+                  <Zap className="mr-2" /> Start a new challenge
                 </Button>
                 <Button variant="outline" className="justify-start">
-                  <Droplets className="mr-2 icon-3d" /> Purchase offsets
+                  <Droplets className="mr-2" /> Purchase offsets
                 </Button>
               </CardContent>
             </Card>
