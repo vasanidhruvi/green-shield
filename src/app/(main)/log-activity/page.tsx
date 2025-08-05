@@ -94,7 +94,7 @@ export default function LogActivityPage() {
         </div>
       </header>
 
-      <div className="w-full" style={{ perspective: '1500px' }}>
+      <div className="w-full max-w-2xl mx-auto" style={{ perspective: '1500px' }}>
       <InteractiveCard>
         <Card>
            <Form {...form}>
