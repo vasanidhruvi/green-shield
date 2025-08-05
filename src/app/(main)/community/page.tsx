@@ -44,7 +44,7 @@ export default function CommunityPage() {
         <div className="flex flex-col gap-8">
             <header>
                 <h1 className="text-3xl font-bold font-headline">Community Feed</h1>
-                <p className="text-muted-foreground">See how the ClimateSync community is making a difference.</p>
+                <p className="text-muted-foreground">See how the Carbon Nexus community is making a difference.</p>
             </header>
             
             <div className="max-w-2xl mx-auto w-full space-y-6" style={{ perspective: '1500px' }}>
@@ -72,15 +72,15 @@ export default function CommunityPage() {
                             </CardContent>
                             <CardFooter className="flex justify-start gap-6 text-muted-foreground">
                                 <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
-                                    <Heart className="h-4 w-4 icon-3d" />
+                                    <Heart className="h-4 w-4" />
                                     <span>{item.likes}</span>
                                 </Button>
                                 <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
-                                    <MessageSquare className="h-4 w-4 icon-3d" />
+                                    <MessageSquare className="h-4 w-4" />
                                     <span>{item.comments}</span>
                                 </Button>
                                  <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
-                                    <Repeat className="h-4 w-4 icon-3d" />
+                                    <Repeat className="h-4 w-4" />
                                     <span>Share</span>
                                 </Button>
                             </CardFooter>
