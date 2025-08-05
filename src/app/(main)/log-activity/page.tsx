@@ -2,11 +2,12 @@
 'use client'
 
 import * as React from 'react'
+import { useRouter } from 'next/navigation'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { format } from "date-fns"
-import { Calendar as CalendarIcon, Car, Beef, Home, ShoppingBag, Leaf, Zap } from "lucide-react"
+import { Calendar as CalendarIcon, Car, Beef, Home, ShoppingBag, Leaf, Zap, ArrowLeft } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -59,6 +60,7 @@ const formSchema = z.object({
 })
 
 export default function LogActivityPage() {
+  const router = useRouter()
   const { toast } = useToast()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -81,9 +83,15 @@ export default function LogActivityPage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <header>
-        <h1 className="text-3xl font-bold font-headline">Log a New Activity</h1>
-        <p className="text-muted-foreground">Record your eco-friendly actions to track your impact and earn credits.</p>
+      <header className="flex items-center gap-4">
+        <Button variant="outline" size="icon" className="h-10 w-10" onClick={() => router.back()}>
+            <ArrowLeft className="h-5 w-5"/>
+            <span className="sr-only">Back</span>
+        </Button>
+        <div>
+            <h1 className="text-3xl font-bold font-headline">Log a New Activity</h1>
+            <p className="text-muted-foreground">Record your eco-friendly actions to track your impact and earn credits.</p>
+        </div>
       </header>
 
       <div className="max-w-2xl mx-auto w-full" style={{ perspective: '1500px' }}>
