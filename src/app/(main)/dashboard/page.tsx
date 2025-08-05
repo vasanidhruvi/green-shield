@@ -1,9 +1,7 @@
 'use client'
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/ui/chart'
-import { Pie, PieChart, Legend } from 'recharts'
-import { Leaf, Droplets, Zap, ShieldCheck, Plus, TreePine } from 'lucide-react'
+import { Leaf, Droplets, Zap, ShieldCheck, Plus, TreePine, Car, Home, Beef, ShoppingBag } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import Image from 'next/image'
@@ -11,24 +9,15 @@ import React from 'react'
 import { cn } from '@/lib/utils'
 import { InteractiveCard } from '@/components/ui/interactive-card'
 
-const chartData = [
-  { category: 'transport', value: 186, fill: 'var(--color-transport)' },
-  { category: 'energy', value: 240, fill: 'var(--color-energy)' },
-  { category: 'food', value: 90, fill: 'var(--color-food)' },
-  { category: 'goods', value: 138, fill: 'var(--color-goods)' },
+const footprintData = [
+  { category: 'Transport', value: 186, color: 'bg-blue-500', icon: Car },
+  { category: 'Energy', value: 240, color: 'bg-yellow-500', icon: Home },
+  { category: 'Food', value: 90, color: 'bg-red-500', icon: Beef },
+  { category: 'Goods', value: 138, color: 'bg-green-500', icon: ShoppingBag },
 ]
 
-const chartConfig = {
-  value: { label: 'CO₂e (kg)' },
-  transport: { label: 'Transport', color: 'hsl(var(--chart-1))' },
-  energy: { label: 'Energy', color: 'hsl(var(--chart-2))' },
-  food: { label: 'Food', color: 'hsl(var(--chart-3))' },
-  goods: { label: 'Goods', color: 'hsl(var(--chart-4))' },
-} satisfies ChartConfig
-
-
 export default function DashboardPage() {
-  const totalFootprint = chartData.reduce((acc, curr) => acc + curr.value, 0)
+  const totalFootprint = footprintData.reduce((acc, curr) => acc + curr.value, 0)
   const treeGrowth = Math.min((totalFootprint / 1000) * 100, 100) // Example growth logic
 
   return (
@@ -104,75 +93,25 @@ export default function DashboardPage() {
         {/* Side Column */}
         <div className="row-start-1 lg:row-start-auto flex flex-col gap-6">
             <InteractiveCard className="flex-1 flex flex-col">
-                <Card className="flex-1 flex flex-col backdrop-blur-sm">
-                    <CardHeader className="items-center pb-0">
+                 <Card className="flex-1 flex flex-col backdrop-blur-sm">
+                    <CardHeader>
                         <CardTitle className="text-base font-headline">Footprint Breakdown</CardTitle>
                         <CardDescription>Your CO₂e by category</CardDescription>
                     </CardHeader>
-                    <CardContent className="flex-1 flex items-center justify-center pb-0">
-                        <ChartContainer
-                            config={chartConfig}
-                            className="mx-auto aspect-square h-full w-full"
-                        >
-                            <PieChart>
-                                <ChartTooltip
-                                    cursor={false}
-                                    content={<ChartTooltipContent hideLabel nameKey="category" />}
-                                />
-                                <Pie
-                                    data={chartData}
-                                    dataKey="value"
-                                    nameKey="category"
-                                    innerRadius={60}
-                                    strokeWidth={5}
-                                    activeIndex={0}
-                                    activeShape={({ outerRadius = 0, ...props }) => (
-                                        <g>
-                                            <title>{props.payload.category}</title>
-                                            <path d={props.d} fill={props.fill} stroke={props.stroke} />
-                                            <path
-                                                d={`M${props.cx},${props.cy}L${props.mx},${props.my}L${props.lx},${props.ly}Z`}
-                                                fill="hsla(var(--primary), 0.5)"
-                                                stroke="hsl(var(--primary))"
-                                            />
-                                            <circle cx={props.cx} cy={props.cy} r="40" fill="hsl(var(--background))" />
-                                            <text
-                                                x={props.cx}
-                                                y={props.cy}
-                                                textAnchor="middle"
-                                                dominantBaseline="central"
-                                                className="fill-foreground text-2xl font-bold"
-                                            >
-                                                {props.payload.value}
-                                            </text>
-                                            <text
-                                                x={props.cx}
-                                                y={props.cy + 18}
-                                                textAnchor="middle"
-                                                dominantBaseline="central"
-                                                className="fill-muted-foreground text-sm"
-                                            >
-                                                kg CO₂e
-                                            </text>
-                                        </g>
-                                    )}
-                                />
-                                <Legend
-                                    content={({ payload }) => {
-                                        return (
-                                            <ul className="flex flex-wrap gap-x-4 gap-y-1 justify-center text-sm text-muted-foreground">
-                                                {payload?.map((entry) => (
-                                                    <li key={`item-${entry.value}`} className="flex items-center gap-1.5">
-                                                        <span className="h-2 w-2 rounded-full" style={{ backgroundColor: entry.color }} />
-                                                        {entry.payload.category}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        )
-                                    }}
-                                />
-                            </PieChart>
-                        </ChartContainer>
+                    <CardContent className="space-y-4">
+                        {footprintData.map(item => {
+                            const percentage = (item.value / totalFootprint) * 100;
+                            return (
+                                <div key={item.category} className="group transition-all duration-300">
+                                    <div className="flex items-center gap-3 mb-1">
+                                        <item.icon className={cn("w-5 h-5 text-muted-foreground", item.color.replace('bg-', 'text-'))} />
+                                        <span className="text-sm font-medium">{item.category}</span>
+                                        <span className="ml-auto text-sm font-semibold">{item.value} kg</span>
+                                    </div>
+                                    <Progress value={percentage} className="h-2 [&>*]:transition-all [&>*]:duration-500" indicatorClassName={item.color} />
+                               </div>
+                            )
+                        })}
                     </CardContent>
                 </Card>
             </InteractiveCard>
