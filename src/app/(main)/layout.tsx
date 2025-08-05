@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, Recycle, Sparkles, Trophy, Users, Leaf, Award, PlusCircle, ChevronDown } from "lucide-react"
+import { Home, Recycle, Sparkles, Trophy, Users, Leaf, Award, PlusCircle, ChevronDown } from "lucide-react"
 import { AnimatePresence, motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
@@ -31,7 +31,7 @@ import { Separator } from "@/components/ui/separator"
 import { User, LogOut } from "lucide-react"
 
 const navItems = [
-  { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard", subItems: [
+  { href: "/dashboard", icon: Home, label: "Home", subItems: [
       { href: "/log-activity", icon: PlusCircle, label: "Log Activity" },
   ] },
   { href: "/challenges", icon: Trophy, label: "Challenges" },
