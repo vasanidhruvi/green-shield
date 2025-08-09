@@ -66,7 +66,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <div className="hidden group-data-[collapsible=icon]:block">
               <Leaf className="h-6 w-6 text-primary"/>
             </div>
-            <SidebarTrigger className="hidden group-data-[collapsible=icon]:hidden max-md:inline-flex" />
+            <SidebarTrigger className="hidden group-data-[collapsible=icon]:hidden md:inline-flex" />
           </div>
         </SidebarHeader>
         <SidebarContent>
