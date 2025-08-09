@@ -46,10 +46,7 @@ function MainHeader() {
     
     return (
         <header className="p-4 md:p-6 lg:p-8 flex items-center gap-4">
-             <SidebarTrigger className="md:hidden" />
-             <div className={cn("hidden md:block", !open && "md:hidden")}>
-                <SidebarTrigger />
-             </div>
+             <SidebarTrigger />
              <h1 className="text-lg font-semibold md:text-2xl">{pageTitle}</h1>
         </header>
     )
@@ -82,7 +79,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <div className="hidden group-data-[collapsible=icon]:block">
               <Leaf className="h-6 w-6 text-primary"/>
             </div>
-             <SidebarTrigger className="hidden group-data-[collapsible=icon]:hidden md:inline-flex" />
+             {/* <SidebarTrigger className="hidden group-data-[collapsible=icon]:hidden md:inline-flex" /> */}
           </div>
         </SidebarHeader>
         <SidebarContent>
