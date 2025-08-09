@@ -10,7 +10,6 @@ import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Lightbulb, ListChecks, PartyPopper, Car, Beef, Home, ShoppingBag, Users, Zap } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import { InteractiveCard } from '@/components/ui/interactive-card'
 import type { PersonalizedEcoTipsOutput } from '@/ai/flows/personalized-eco-tips'
 
 const initialState: { message: string, plan?: PersonalizedEcoTipsOutput, errors?: any } = {
@@ -48,8 +47,8 @@ export function EcoTipsClient() {
   const [state, formAction] = useFormState(generateTips, initialState)
 
   return (
-    <div className="grid gap-8 md:grid-cols-3" style={{ perspective: '1500px' }}>
-      <InteractiveCard className="md:col-span-1">
+    <div className="grid gap-8 md:grid-cols-3">
+      <div className="md:col-span-1">
         <Card>
           <CardHeader>
             <CardTitle className="font-headline">Your Eco Profile</CardTitle>
@@ -101,12 +100,11 @@ export function EcoTipsClient() {
             </form>
           </CardContent>
         </Card>
-      </InteractiveCard>
+      </div>
       
       <div className="space-y-6 md:col-span-2">
         {state.plan?.actionSteps && state.plan.actionSteps.length > 0 ? (
            <div className="space-y-6">
-             <InteractiveCard>
                 <Card className="bg-primary/5 border-primary/20">
                     <CardHeader>
                         <div className="flex items-center gap-4">
@@ -118,14 +116,12 @@ export function EcoTipsClient() {
                         </div>
                     </CardHeader>
                 </Card>
-            </InteractiveCard>
 
             {state.plan.actionSteps.map((step, index) => {
                 const Icon = categoryIcons[step.category] || ListChecks;
                 const difficultyColor = difficultyColors[step.difficulty] || "bg-gray-400";
                 return (
-                     <InteractiveCard key={index}>
-                        <Card>
+                        <Card key={index}>
                             <CardHeader className="flex flex-row items-start gap-4">
                                <div className={`p-2 rounded-full bg-accent/50 ${difficultyColor}`}>
                                     <Icon className="w-6 h-6 text-white" />
@@ -145,18 +141,15 @@ export function EcoTipsClient() {
                                </div>
                             </CardFooter>
                         </Card>
-                    </InteractiveCard>
                 )
             })}
            </div>
         ) : (
-            <InteractiveCard>
-                <Card className="flex flex-col items-center justify-center h-full text-center p-8 bg-accent/30 border-dashed">
-                    <Lightbulb className="w-12 h-12 text-muted-foreground mb-4" />
-                    <h3 className="text-lg font-semibold text-muted-foreground font-headline">Your Personalized Action Plan Awaits</h3>
-                    <p className="text-sm text-muted-foreground">Fill out your eco-profile, and our AI will generate a tailored plan to help you make a positive impact.</p>
-                </Card>
-            </InteractiveCard>
+            <Card className="flex flex-col items-center justify-center h-full text-center p-8 bg-accent/30 border-dashed">
+                <Lightbulb className="w-12 h-12 text-muted-foreground mb-4" />
+                <h3 className="text-lg font-semibold text-muted-foreground font-headline">Your Personalized Action Plan Awaits</h3>
+                <p className="text-sm text-muted-foreground">Fill out your eco-profile, and our AI will generate a tailored plan to help you make a positive impact.</p>
+            </Card>
         )}
         {state.message && !state.plan?.actionSteps?.length && state.message !== 'Success!' && (
             <Alert variant={state.errors && Object.keys(state.errors).length > 0 ? "destructive" : "default"}>

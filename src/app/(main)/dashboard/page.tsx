@@ -29,7 +29,6 @@ import { Progress } from '@/components/ui/progress'
 import {
   ChartConfig,
 } from '@/components/ui/chart'
-import { InteractiveCard } from '@/components/ui/interactive-card'
 
 const footprintCategories = [
   { category: 'Transport', color: 'hsl(var(--chart-1))', icon: Car },
@@ -75,11 +74,9 @@ export default function DashboardPage() {
 
       <div
         className="grid gap-6 lg:grid-cols-3"
-        style={{ perspective: '1500px' }}
       >
         {/* Main Column */}
         <div className="lg:col-span-2 flex flex-col gap-6">
-          <InteractiveCard>
             <Card className="bg-primary/5 border-primary/20 backdrop-blur-sm">
               <CardHeader>
                 <div className="flex items-center gap-4">
@@ -127,9 +124,7 @@ export default function DashboardPage() {
                 </div>
               </CardContent>
             </Card>
-          </InteractiveCard>
 
-          <InteractiveCard>
             <Card className="backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="font-headline">Your Eco-Garden</CardTitle>
@@ -158,12 +153,10 @@ export default function DashboardPage() {
                 </div>
               </CardContent>
             </Card>
-          </InteractiveCard>
         </div>
 
         {/* Side Column */}
         <div className="row-start-1 lg:row-start-auto flex flex-col gap-6">
-          <InteractiveCard className="flex-1 flex flex-col">
           <Card className="flex-1 flex flex-col backdrop-blur-sm">
             <CardHeader>
                 <CardTitle className="text-base font-headline">Footprint Breakdown</CardTitle>
@@ -190,8 +183,6 @@ export default function DashboardPage() {
                  <Button variant="link" size="sm" className="p-0 text-xs">View Detailed Report</Button>
             </CardFooter>
         </Card>
-          </InteractiveCard>
-          <InteractiveCard>
             <Card className="backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="font-headline">Quick Actions</CardTitle>
@@ -214,7 +205,6 @@ export default function DashboardPage() {
                 </Button>
               </CardContent>
             </Card>
-          </InteractiveCard>
         </div>
       </div>
     </div>

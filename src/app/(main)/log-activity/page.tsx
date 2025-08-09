@@ -33,7 +33,6 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { useToast } from "@/hooks/use-toast"
-import { InteractiveCard } from '@/components/ui/interactive-card'
 
 const activityCategories = [
   { value: 'Transport', label: 'Transport', icon: Car },
@@ -77,16 +76,16 @@ export default function LogActivityPage() {
       title: "Activity Logged!",
       description: `Successfully logged "${values.title}" in ${values.category}.`,
     })
-    form.reset()
-    form.setValue("date", undefined)
+    form.reset();
+    form.setValue("date", undefined);
   }
 
   return (
     <div className="flex flex-col gap-8">
       <header className="flex items-center gap-4">
         <Button variant="outline" size="icon" className="h-10 w-10" onClick={() => router.back()}>
-          <ArrowLeft className="h-5 w-5" />
-          <span className="sr-only">Back</span>
+            <ArrowLeft className="h-5 w-5"/>
+            <span className="sr-only">Back</span>
         </Button>
         <div>
           <h1 className="text-3xl font-bold font-headline">Log a New Activity</h1>
@@ -94,142 +93,139 @@ export default function LogActivityPage() {
         </div>
       </header>
 
-      <div className="w-full max-w-2xl mx-auto" style={{ perspective: '1500px' }}>
-        <InteractiveCard>
-          <Card>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)}>
-                <CardHeader>
-                  <CardTitle>Activity Details</CardTitle>
-                  <CardDescription>Fill in the details of the sustainable action you took.</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="category"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Category</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+      <div className="w-full max-w-2xl mx-auto">
+        <Card>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <CardHeader>
+                <CardTitle>Activity Details</CardTitle>
+                <CardDescription>Fill in the details of the sustainable action you took.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="category"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Category</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a category" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {activityCategories.map((cat) => (
+                            <SelectItem key={cat.value} value={cat.value}>
+                              <div className="flex items-center gap-2">
+                                <cat.icon className="w-4 h-4 text-muted-foreground" />
+                                <span>{cat.label}</span>
+                              </div>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Activity Title</FormLabel>
+                      <FormControl>
+                        <Input placeholder="e.g., Cycled to work" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Description (Optional)</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="e.g., Avoided using the car for my 5km commute." {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="date"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel>Date of Activity</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
                           <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a category" />
-                            </SelectTrigger>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "pl-3 text-left font-normal",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                              {field.value ? (
+                                format(field.value, "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
                           </FormControl>
-                          <SelectContent>
-                            {activityCategories.map((cat) => (
-                              <SelectItem key={cat.value} value={cat.value}>
-                                <div className="flex items-center gap-2">
-                                  <cat.icon className="w-4 h-4 text-muted-foreground" />
-                                  <span>{cat.label}</span>
-                                </div>
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="title"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Activity Title</FormLabel>
-                        <FormControl>
-                          <Input placeholder="e.g., Cycled to work" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="description"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Description (Optional)</FormLabel>
-                        <FormControl>
-                          <Textarea placeholder="e.g., Avoided using the car for my 5km commute." {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="date"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col">
-                        <FormLabel>Date of Activity</FormLabel>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <FormControl>
-                              <Button
-                                variant={"outline"}
-                                className={cn(
-                                  "pl-3 text-left font-normal",
-                                  !field.value && "text-muted-foreground"
-                                )}
-                              >
-                                {field.value ? (
-                                  format(field.value, "PPP")
-                                ) : (
-                                  <span>Pick a date</span>
-                                )}
-                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                              </Button>
-                            </FormControl>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
-                              mode="single"
-                              selected={field.value}
-                              onSelect={field.onChange}
-                              disabled={(date) =>
-                                date > new Date() || date < new Date("1900-01-01")
-                              }
-                              initialFocus
-                            />
-                          </PopoverContent>
                         </Popover>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={(date) =>
+                              date > new Date() || date < new Date("1900-01-01")
+                            }
+                            initialFocus
+                          />
+                        </PopoverContent>
                         <FormMessage />
                       </FormItem>
                     )}
-                  />
+                />
 
-                  <FormField
-                    control={form.control}
-                    name="co2eSaved"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Estimated CO₂e Saved (kg)</FormLabel>
-                        <FormControl>
-                          <Input type="number" placeholder="e.g., 1.2" {...field} />
-                        </FormControl>
-                        <FormDescription className="flex items-center gap-1.5 text-xs">
-                          <BotMessageSquare className="w-3.5 h-3.5" />
-                          Need help? We can estimate this for you soon.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </CardContent>
-                <CardFooter className="flex flex-col gap-4">
-                  <Button type="submit" className="w-full">
-                    <Zap className="mr-2" /> Log Activity & Earn Credits
-                  </Button>
-                  <p className="text-xs text-muted-foreground">Your logged activities contribute to your Green Credits balance.</p>
-                </CardFooter>
-              </form>
-            </Form>
-          </Card>
-        </InteractiveCard>
+                <FormField
+                  control={form.control}
+                  name="co2eSaved"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Estimated CO₂e Saved (kg)</FormLabel>
+                      <FormControl>
+                        <Input type="number" placeholder="e.g., 1.2" {...field} />
+                      </FormControl>
+                      <FormDescription className="flex items-center gap-1.5 text-xs">
+                        <BotMessageSquare className="w-3.5 h-3.5" />
+                        Need help? We can estimate this for you soon.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </CardContent>
+              <CardFooter className="flex flex-col gap-4">
+                <Button type="submit" className="w-full">
+                  <Zap className="mr-2" /> Log Activity & Earn Credits
+                </Button>
+                <p className="text-xs text-muted-foreground">Your logged activities contribute to your Green Credits balance.</p>
+              </CardFooter>
+            </form>
+          </Form>
+        </Card>
       </div>
     </div >
   )
