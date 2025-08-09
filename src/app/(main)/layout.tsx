@@ -21,7 +21,6 @@ import {
   SidebarInset,
   SidebarMenuSub,
   SidebarMenuSubButton,
-  SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/logo"
@@ -29,6 +28,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
 import { User, LogOut } from "lucide-react"
+import { useSidebar } from "@/components/ui/sidebar"
 
 const navItems = [
   { href: "/dashboard", icon: Home, label: "Dashboard" },
@@ -38,6 +38,22 @@ const navItems = [
   { href: "/eco-tips", icon: Sparkles, label: "Eco-Tips" },
   { href: "/community", icon: Users, label: "Community" },
 ];
+
+function MainHeader() {
+    const { open } = useSidebar();
+    const pathname = usePathname();
+    const pageTitle = navItems.find(item => pathname.startsWith(item.href))?.label || "Dashboard";
+    
+    return (
+        <header className="p-4 md:p-6 lg:p-8 flex items-center gap-4">
+             <SidebarTrigger className="md:hidden" />
+             <div className={cn("hidden md:block", !open && "md:hidden")}>
+                <SidebarTrigger />
+             </div>
+             <h1 className="text-lg font-semibold md:text-2xl">{pageTitle}</h1>
+        </header>
+    )
+}
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -66,7 +82,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <div className="hidden group-data-[collapsible=icon]:block">
               <Leaf className="h-6 w-6 text-primary"/>
             </div>
-            <SidebarTrigger className="hidden group-data-[collapsible=icon]:hidden md:inline-flex" />
+             <SidebarTrigger className="hidden group-data-[collapsible=icon]:hidden md:inline-flex" />
           </div>
         </SidebarHeader>
         <SidebarContent>
@@ -156,10 +172,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <header className="p-4 md:p-6 lg:p-8 flex items-center gap-4">
-             <SidebarTrigger className="md:hidden" />
-             <h1 className="text-lg font-semibold md:text-2xl">Dashboard</h1>
-        </header>
+        <MainHeader/>
         <main className="p-4 md:p-6 lg:p-8 pt-0">
             {children}
         </main>
