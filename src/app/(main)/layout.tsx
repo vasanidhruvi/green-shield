@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Recycle, Sparkles, Trophy, Users, Leaf, Award, PlusCircle, ChevronDown } from "lucide-react"
+import { Home, Recycle, Sparkles, Trophy, Users, Leaf, Award, ChevronDown } from "lucide-react"
 import { AnimatePresence, motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
@@ -31,11 +31,11 @@ import { Separator } from "@/components/ui/separator"
 import { User, LogOut } from "lucide-react"
 
 const navItems = [
-  { href: "/dashboard", icon: Home, label: "Home" },
+  { href: "/dashboard", icon: Home, label: "Dashboard" },
   { href: "/challenges", icon: Trophy, label: "Challenges" },
   { href: "/green-credits", icon: Award, label: "Green Credits" },
   { href: "/offsets", icon: Recycle, label: "Offsets" },
-  { href: "/eco-tips", icon: Sparkles, label: "Eco Tips" },
+  { href: "/eco-tips", icon: Sparkles, label: "Eco-Tips" },
   { href: "/community", icon: Users, label: "Community" },
 ];
 
@@ -51,7 +51,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     // If the pathname changes, make sure the correct submenu is open
     const currentParent = navItems.find(item => (item as any).subItems?.some((sub: any) => pathname.startsWith(sub.href)));
     if (currentParent) {
-        setOpenSubmenus(prev => ({...prev, [currentParent.href]: true}));
+        setOpenSubmenus(prev => ({...prev, [(currentParent as any).href]: true}));
     }
   }, [pathname]);
 
@@ -66,7 +66,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <div className="hidden group-data-[collapsible=icon]:block">
               <Leaf className="h-6 w-6 text-primary"/>
             </div>
-            <SidebarTrigger className="group-data-[collapsible=icon]:hidden" />
+            <SidebarTrigger className="hidden group-data-[collapsible=icon]:hidden max-md:inline-flex" />
           </div>
         </SidebarHeader>
         <SidebarContent>
@@ -156,9 +156,13 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <div className="p-4 md:p-6 lg:p-8">
+        <header className="p-4 md:p-6 lg:p-8 flex items-center gap-4">
+             <SidebarTrigger className="md:hidden" />
+             <h1 className="text-lg font-semibold md:text-2xl">Dashboard</h1>
+        </header>
+        <main className="p-4 md:p-6 lg:p-8 pt-0">
             {children}
-        </div>
+        </main>
       </SidebarInset>
     </SidebarProvider>
   )
