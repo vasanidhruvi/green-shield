@@ -66,7 +66,7 @@ export default function LogActivityPage() {
     defaultValues: {
       title: "",
       description: "",
-      co2eSaved: 0,
+      co2eSaved: 0
     },
   })
 
