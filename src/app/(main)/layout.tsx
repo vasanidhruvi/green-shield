@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -21,6 +22,7 @@ import {
   SidebarInset,
   SidebarMenuSub,
   SidebarMenuSubButton,
+  useSidebar,
 } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/logo"
@@ -28,7 +30,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
 import { User, LogOut } from "lucide-react"
-import { useSidebar } from "@/components/ui/sidebar"
+
 
 const navItems = [
   { href: "/dashboard", icon: Home, label: "Dashboard" },
@@ -46,31 +48,36 @@ function MainHeader() {
     
     return (
         <header className="p-4 md:p-6 lg:p-8 flex items-center gap-4">
-             <SidebarTrigger />
+             <SidebarTrigger className="md:hidden" />
              <h1 className="text-lg font-semibold md:text-2xl">{pageTitle}</h1>
         </header>
     )
 }
 
-export default function MainLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const [openSubmenus, setOpenSubmenus] = React.useState<Record<string, boolean>>({});
+function MainSidebar() {
+    const pathname = usePathname();
+    const { setOpenMobile, isMobile } = useSidebar();
+    const [openSubmenus, setOpenSubmenus] = React.useState<Record<string, boolean>>({});
 
-  const toggleSubmenu = (href: string) => {
-    setOpenSubmenus(prev => ({ ...prev, [href]: !prev[href] }));
-  };
+    const toggleSubmenu = (href: string) => {
+        setOpenSubmenus(prev => ({ ...prev, [href]: !prev[href] }));
+    };
 
-  React.useEffect(() => {
-    // If the pathname changes, make sure the correct submenu is open
-    const currentParent = navItems.find(item => (item as any).subItems?.some((sub: any) => pathname.startsWith(sub.href)));
-    if (currentParent) {
-        setOpenSubmenus(prev => ({...prev, [(currentParent as any).href]: true}));
+    const handleLinkClick = () => {
+        if (isMobile) {
+            setOpenMobile(false);
+        }
     }
-  }, [pathname]);
 
-  return (
-    <SidebarProvider>
-      <Sidebar>
+    React.useEffect(() => {
+        const currentParent = navItems.find(item => (item as any).subItems?.some((sub: any) => pathname.startsWith(sub.href)));
+        if (currentParent) {
+            setOpenSubmenus(prev => ({...prev, [(currentParent as any).href]: true}));
+        }
+    }, [pathname]);
+
+    return (
+        <Sidebar>
         <SidebarHeader>
           <div className="flex items-center justify-between">
             <div className="group-data-[collapsible=icon]:hidden">
@@ -79,7 +86,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <div className="hidden group-data-[collapsible=icon]:block">
               <Leaf className="h-6 w-6 text-primary"/>
             </div>
-             {/* <SidebarTrigger className="hidden group-data-[collapsible=icon]:hidden md:inline-flex" /> */}
+            <SidebarTrigger className="hidden md:inline-flex" />
           </div>
         </SidebarHeader>
         <SidebarContent>
@@ -107,8 +114,8 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                              >
                                 <SidebarMenuSub>
                                 {item.subItems.map((subItem: any) => (
-                                    <SidebarMenuSubItem key={subItem.href}>
-                                        <Link href={subItem.href}>
+                                    <SidebarMenuItem key={subItem.href}>
+                                        <Link href={subItem.href} onClick={handleLinkClick}>
                                             <SidebarMenuSubButton
                                                 isActive={pathname.startsWith(subItem.href)}
                                             >
@@ -116,7 +123,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                                                 <span>{subItem.label}</span>
                                             </SidebarMenuSubButton>
                                         </Link>
-                                    </SidebarMenuSubItem>
+                                    </SidebarMenuItem>
                                 ))}
                                 </SidebarMenuSub>
                              </motion.div>
@@ -124,7 +131,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                         </AnimatePresence>
                     </>
                  ) : (
-                    <Link href={item.href}>
+                    <Link href={item.href} onClick={handleLinkClick}>
                         <SidebarMenuButton
                             isActive={pathname.startsWith(item.href)}
                             tooltip={item.label}
@@ -168,6 +175,13 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
            </Popover>
         </SidebarFooter>
       </Sidebar>
+    )
+}
+
+export default function MainLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <SidebarProvider>
+      <MainSidebar />
       <SidebarInset>
         <MainHeader/>
         <main className="p-4 md:p-6 lg:p-8 pt-0">
