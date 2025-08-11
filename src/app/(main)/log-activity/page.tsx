@@ -76,8 +76,8 @@ export default function LogActivityPage() {
       title: "Activity Logged!",
       description: `Successfully logged "${values.title}" in ${values.category}.`,
     })
-    form.reset();
-    form.setValue("date", undefined);
+    form.reset()
+    form.setValue("date", undefined)
   }
 
   return (
