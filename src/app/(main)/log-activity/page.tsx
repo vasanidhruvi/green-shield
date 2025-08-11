@@ -1,4 +1,3 @@
-
 'use client'
 
 import * as React from 'react'
@@ -40,7 +39,7 @@ const activityCategories = [
   { value: 'Food', label: 'Food', icon: Beef },
   { value: 'Goods', label: 'Shopping', icon: ShoppingBag },
   { value: 'Community', label: 'Community', icon: Leaf },
-];
+]
 
 const formSchema = z.object({
   category: z.string({
@@ -52,7 +51,7 @@ const formSchema = z.object({
   description: z.string().optional(),
   date: z.date({
     required_error: "A date for the activity is required.",
-  }),
+  }).optional(),
   co2eSaved: z.coerce.number().min(0, {
     message: "CO₂e saved must be a positive number.",
   }),
@@ -66,7 +65,9 @@ export default function LogActivityPage() {
     defaultValues: {
       title: "",
       description: "",
-      co2eSaved: 0
+      co2eSaved: 0,
+      category: "",
+      date: new Date()
     },
   })
 
@@ -77,18 +78,17 @@ export default function LogActivityPage() {
       description: `Successfully logged "${values.title}" in ${values.category}.`,
     })
     form.reset()
-    form.setValue("date", undefined)
   }
 
   return (
     <div className="flex flex-col gap-8">
       <header className="flex items-center gap-4">
-        <Button variant="outline" size="icon" className="h-10 w-10" onClick={() => router.back()}>
-            <ArrowLeft className="h-5 w-5"/>
-            <span className="sr-only">Back</span>
+        <Button variant="outline" size="icon" className="h-10 w-10 flex-shrink-0" onClick={() => router.back()}>
+          <ArrowLeft className="h-5 w-5"/>
+          <span className="sr-only">Back</span>
         </Button>
         <div>
-          <h1 className="text-3xl font-bold font-headline">Log a New Activity</h1>
+          <h1 className="text-2xl md:text-3xl font-bold font-headline">Log a New Activity</h1>
           <p className="text-muted-foreground">Record your eco-friendly actions to track your impact and earn credits.</p>
         </div>
       </header>
@@ -102,6 +102,7 @@ export default function LogActivityPage() {
                 <CardDescription>Fill in the details of the sustainable action you took.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
+                {/* Category Field */}
                 <FormField
                   control={form.control}
                   name="category"
@@ -130,6 +131,7 @@ export default function LogActivityPage() {
                   )}
                 />
 
+                {/* Title Field */}
                 <FormField
                   control={form.control}
                   name="title"
@@ -144,6 +146,7 @@ export default function LogActivityPage() {
                   )}
                 />
 
+                {/* Description Field */}
                 <FormField
                   control={form.control}
                   name="description"
@@ -158,6 +161,7 @@ export default function LogActivityPage() {
                   )}
                 />
 
+                {/* Date Field */}
                 <FormField
                   control={form.control}
                   name="date"
@@ -182,7 +186,7 @@ export default function LogActivityPage() {
                               <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                             </Button>
                           </FormControl>
-                        </Popover>
+                        </PopoverTrigger>
                         <PopoverContent className="w-auto p-0" align="start">
                           <Calendar
                             mode="single"
@@ -194,11 +198,13 @@ export default function LogActivityPage() {
                             initialFocus
                           />
                         </PopoverContent>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+                      </Popover>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
 
+                {/* CO₂e Saved Field */}
                 <FormField
                   control={form.control}
                   name="co2eSaved"
@@ -217,6 +223,7 @@ export default function LogActivityPage() {
                   )}
                 />
               </CardContent>
+
               <CardFooter className="flex flex-col gap-4">
                 <Button type="submit" className="w-full">
                   <Zap className="mr-2" /> Log Activity & Earn Credits
