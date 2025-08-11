@@ -227,6 +227,6 @@ export default function LogActivityPage() {
           </Form>
         </Card>
       </div>
-    </div >
+    </div>
   )
 }
