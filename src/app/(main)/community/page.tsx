@@ -43,7 +43,7 @@ export default function CommunityPage() {
         <div className="flex flex-col gap-8">
             <header>
                 <h1 className="text-3xl font-bold font-headline">Community Feed</h1>
-                <p className="text-muted-foreground">See how the Carbon Nexus community is making a difference.</p>
+                <p className="text-muted-foreground">See how the Green Shield community is making a difference.</p>
             </header>
             
             <div className="max-w-2xl mx-auto w-full space-y-6">

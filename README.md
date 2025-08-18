@@ -1,6 +1,6 @@
-# Carbon Nexus: Your Personal Sustainability Companion
+# Green Shield: Your Personal Sustainability Companion
 
-Carbon Nexus is a comprehensive web application designed to empower users to understand, track, and reduce their environmental impact. By gamifying sustainable actions, providing personalized AI-driven tips, and fostering a sense of community, Carbon Nexus aims to make eco-friendly living accessible, rewarding, and impactful.
+Green Shield is a comprehensive web application designed to empower users to understand, track, and reduce their environmental impact. By gamifying sustainable actions, providing personalized AI-driven tips, and fostering a sense of community, Green Shield aims to make eco-friendly living accessible, rewarding, and impactful.
 
 ## ✨ Key Features
 

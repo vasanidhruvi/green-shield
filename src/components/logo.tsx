@@ -16,7 +16,7 @@ export function Logo() {
         <path d="M6 12h12" />
         <path d="M12 2v20" />
       </svg>
-      <span className="text-lg font-bold">Carbon Nexus</span>
+      <span className="text-lg font-bold">Green Shield</span>
     </div>
   );
 }
