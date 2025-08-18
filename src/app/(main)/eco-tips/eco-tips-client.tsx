@@ -1,3 +1,4 @@
+
 'use client'
 
 import { useFormState, useFormStatus } from 'react-dom'
@@ -8,7 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Lightbulb, ListChecks, PartyPopper, Car, Beef, Home, ShoppingBag, Users, Zap } from 'lucide-react'
+import { Lightbulb, ListChecks, PartyPopper, Car, Beef, Home, ShoppingBag, Users, Zap, Loader2 } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import type { PersonalizedEcoTipsOutput } from '@/ai/flows/personalized-eco-tips'
 
@@ -22,8 +23,17 @@ function SubmitButton() {
   const { pending } = useFormStatus()
   return (
     <Button type="submit" disabled={pending} className="w-full">
-      {pending ? 'Generating Your Plan...' : 'Generate My Eco-Action Plan'}
-      <Zap className="ml-2" />
+      {pending ? (
+        <>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          Generating Your Plan...
+        </>
+      ) : (
+        <>
+          Generate My Eco-Action Plan
+          <Zap className="ml-2" />
+        </>
+      )}
     </Button>
   )
 }
@@ -42,82 +52,35 @@ const difficultyColors: Record<string, string> = {
     "Hard": "bg-red-500"
 }
 
+function PlanDisplay({ plan, message, errors }: { plan?: PersonalizedEcoTipsOutput, message: string, errors?: any }) {
+    const { pending } = useFormStatus();
 
-export function EcoTipsClient() {
-  const [state, formAction] = useFormState(generateTips, initialState)
+    if (pending) {
+        return (
+             <Card className="flex flex-col items-center justify-center h-full text-center p-8 bg-accent/30 border-dashed">
+                <Loader2 className="w-12 h-12 text-muted-foreground mb-4 animate-spin" />
+                <h3 className="text-lg font-semibold text-muted-foreground font-headline">Generating your plan...</h3>
+                <p className="text-sm text-muted-foreground">Our AI is crafting your personalized actions. This might take a moment.</p>
+            </Card>
+        )
+    }
 
-  return (
-    <div className="grid gap-8 md:grid-cols-3">
-      <div className="md:col-span-1">
-        <Card>
-          <CardHeader>
-            <CardTitle className="font-headline">Your Eco Profile</CardTitle>
-            <CardDescription>
-              Help us craft the perfect action plan for you.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form action={formAction} className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="lifestyle">Lifestyle & Habits</Label>
-                <Textarea
-                  id="lifestyle"
-                  name="lifestyle"
-                  placeholder="e.g., I live in a city apartment, commute by car, enjoy dining out, and travel internationally once a year."
-                  required
-                  rows={5}
-                />
-                {state.errors?.lifestyle && (
-                  <p className="text-sm font-medium text-destructive">{state.errors.lifestyle[0]}</p>
-                )}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="location">Your Location</Label>
-                <Input
-                  id="location"
-                  name="location"
-                  placeholder="e.g., San Francisco, CA"
-                  required
-                />
-                 {state.errors?.location && (
-                  <p className="text-sm font-medium text-destructive">{state.errors.location[0]}</p>
-                )}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="climateIssues">Regional Climate Concerns</Label>
-                <Textarea
-                  id="climateIssues"
-                  name="climateIssues"
-                  placeholder="e.g., We experience frequent droughts and are concerned about wildfire risks."
-                  required
-                   rows={3}
-                />
-                {state.errors?.climateIssues && (
-                  <p className="text-sm font-medium text-destructive">{state.errors.climateIssues[0]}</p>
-                )}
-              </div>
-              <SubmitButton />
-            </form>
-          </CardContent>
-        </Card>
-      </div>
-      
-      <div className="space-y-6 md:col-span-2">
-        {state.plan?.actionSteps && state.plan.actionSteps.length > 0 ? (
+    if (plan?.actionSteps && plan.actionSteps.length > 0) {
+        return (
            <div className="space-y-6">
                 <Card className="bg-primary/5 border-primary/20">
                     <CardHeader>
                         <div className="flex items-center gap-4">
                             <PartyPopper className="w-10 h-10 text-primary icon-3d"/>
                             <div>
-                                <CardTitle className="text-primary font-headline">{state.plan.planTitle}</CardTitle>
-                                <CardDescription>{state.plan.introduction}</CardDescription>
+                                <CardTitle className="text-primary font-headline">{plan.planTitle}</CardTitle>
+                                <CardDescription>{plan.introduction}</CardDescription>
                             </div>
                         </div>
                     </CardHeader>
                 </Card>
 
-            {state.plan.actionSteps.map((step, index) => {
+            {plan.actionSteps.map((step, index) => {
                 const Icon = categoryIcons[step.category] || ListChecks;
                 const difficultyColor = difficultyColors[step.difficulty] || "bg-gray-400";
                 return (
@@ -144,20 +107,89 @@ export function EcoTipsClient() {
                 )
             })}
            </div>
-        ) : (
-            <Card className="flex flex-col items-center justify-center h-full text-center p-8 bg-accent/30 border-dashed">
-                <Lightbulb className="w-12 h-12 text-muted-foreground mb-4" />
-                <h3 className="text-lg font-semibold text-muted-foreground font-headline">Your Personalized Action Plan Awaits</h3>
-                <p className="text-sm text-muted-foreground">Fill out your eco-profile, and our AI will generate a tailored plan to help you make a positive impact.</p>
-            </Card>
-        )}
-        {state.message && !state.plan?.actionSteps?.length && state.message !== 'Success!' && (
-            <Alert variant={state.errors && Object.keys(state.errors).length > 0 ? "destructive" : "default"}>
-                <AlertTitle>{state.errors && Object.keys(state.errors).length > 0 ? 'Error' : 'Notice'}</AlertTitle>
-                <AlertDescription>{state.message}</AlertDescription>
+        )
+    }
+
+    if (message && message !== 'Success!') {
+        return (
+            <Alert variant={errors && Object.keys(errors).length > 0 ? "destructive" : "default"}>
+                <AlertTitle>{errors && Object.keys(errors).length > 0 ? 'Error' : 'Notice'}</AlertTitle>
+                <AlertDescription>{message}</AlertDescription>
             </Alert>
-        )}
-      </div>
+        )
+    }
+
+    return (
+        <Card className="flex flex-col items-center justify-center h-full text-center p-8 bg-accent/30 border-dashed">
+            <Lightbulb className="w-12 h-12 text-muted-foreground mb-4" />
+            <h3 className="text-lg font-semibold text-muted-foreground font-headline">Your Personalized Action Plan Awaits</h3>
+            <p className="text-sm text-muted-foreground">Fill out your eco-profile, and our AI will generate a tailored plan to help you make a positive impact.</p>
+        </Card>
+    )
+}
+
+export function EcoTipsClient() {
+  const [state, formAction] = useFormState(generateTips, initialState)
+
+  return (
+    <div className="grid gap-8 md:grid-cols-3">
+      <form action={formAction} className="md:col-span-3 grid gap-8 md:grid-cols-3">
+        <div className="md:col-span-1">
+          <Card>
+            <CardHeader>
+              <CardTitle className="font-headline">Your Eco Profile</CardTitle>
+              <CardDescription>
+                Help us craft the perfect action plan for you.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+                <div className="space-y-2">
+                  <Label htmlFor="lifestyle">Lifestyle & Habits</Label>
+                  <Textarea
+                    id="lifestyle"
+                    name="lifestyle"
+                    placeholder="e.g., I live in a city apartment, commute by car, enjoy dining out, and travel internationally once a year."
+                    required
+                    rows={5}
+                  />
+                  {state.errors?.lifestyle && (
+                    <p className="text-sm font-medium text-destructive">{state.errors.lifestyle[0]}</p>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="location">Your Location</Label>
+                  <Input
+                    id="location"
+                    name="location"
+                    placeholder="e.g., San Francisco, CA"
+                    required
+                  />
+                   {state.errors?.location && (
+                    <p className="text-sm font-medium text-destructive">{state.errors.location[0]}</p>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="climateIssues">Regional Climate Concerns</Label>
+                  <Textarea
+                    id="climateIssues"
+                    name="climateIssues"
+                    placeholder="e.g., We experience frequent droughts and are concerned about wildfire risks."
+                    required
+                     rows={3}
+                  />
+                  {state.errors?.climateIssues && (
+                    <p className="text-sm font-medium text-destructive">{state.errors.climateIssues[0]}</p>
+                  )}
+                </div>
+                <SubmitButton />
+            </CardContent>
+          </Card>
+        </div>
+      
+        <div className="space-y-6 md:col-span-2">
+            <PlanDisplay plan={state.plan} message={state.message} errors={state.errors} />
+        </div>
+      </form>
     </div>
   )
 }
