@@ -9,12 +9,12 @@ export function Logo() {
         fill="none"
         stroke="currentColor"
         strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
-        <path d="M12 2a10 10 0 1 0 10 10" />
-        <path d="m12 18-6-6" />
-        <path d="m12 12 6-6" />
-        <path d="M6 12h12" />
-        <path d="M12 2v20" />
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <path d="M9.5 9.5c.94-1 2.5-1.5 3.5-1.5 2.5 0 4.5 2 4.5 4.5c0 1.93-1.18 3.57-2.88 4.29" />
+        <path d="M14.5 14.5c-.94 1-2.5 1.5-3.5 1.5-2.5 0-4.5-2-4.5-4.5 0-1.93 1.18-3.57 2.88-4.29" />
       </svg>
       <span className="text-lg font-bold">Green Shield</span>
     </div>
