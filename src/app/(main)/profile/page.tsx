@@ -1,3 +1,4 @@
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -26,11 +27,20 @@ export default function ProfilePage() {
               </CardHeader>
               <CardContent className="space-y-6">
                  <div className="flex flex-col sm:flex-row items-center gap-6">
-                      <Avatar className="w-20 h-20">
-                          <AvatarImage src="https://placehold.co/100x100" data-ai-hint="people portrait"/>
-                          <AvatarFallback>U</AvatarFallback>
-                      </Avatar>
-                      <Button variant="outline"><Upload className="mr-2"/> Change Picture</Button>
+                      <div className="relative">
+                        <Avatar className="w-24 h-24">
+                            <AvatarImage src="https://placehold.co/150x150" data-ai-hint="people portrait"/>
+                            <AvatarFallback>U</AvatarFallback>
+                        </Avatar>
+                        <Button variant="outline" size="icon" className="absolute -bottom-2 -right-2 rounded-full bg-background">
+                            <Upload className="w-4 h-4"/>
+                            <span className="sr-only">Upload Picture</span>
+                        </Button>
+                      </div>
+                      <div className="flex-1">
+                          <h2 className="text-xl font-bold">Eco Warrior</h2>
+                          <p className="text-muted-foreground">user@example.com</p>
+                      </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">

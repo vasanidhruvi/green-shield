@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
@@ -63,7 +64,7 @@ export default function CommunityPage() {
                         <CardContent>
                             <p className="mb-4">{item.content}</p>
                             {item.image && (
-                                <div className="relative h-64 w-full rounded-lg overflow-hidden">
+                                <div className="relative aspect-video w-full rounded-lg overflow-hidden">
                                     <Image src={item.image} alt="Feed item image" fill style={{ objectFit: 'cover' }} data-ai-hint={item.imageHint} />
                                 </div>
                             )}

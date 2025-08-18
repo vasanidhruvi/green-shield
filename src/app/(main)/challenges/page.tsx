@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
@@ -8,9 +9,9 @@ import Image from 'next/image'
 import { Award, Leaf, Users, Zap } from 'lucide-react'
 
 const challenges = [
-    { title: 'Meatless Mondays', description: 'Go vegetarian for one day a week.', progress: 75, icon: Leaf, reward: '10 Green Credits' },
-    { title: 'Commute Crusader', description: 'Use public transport or cycle to work.', progress: 50, icon: Zap, reward: '20 Green Credits' },
-    { title: 'Thrift Shopper', description: 'Buy one second-hand item instead of new.', progress: 100, completed: true, icon: Users, reward: '15 Green Credits' },
+    { title: 'Meatless Mondays', description: 'Go vegetarian for one day a week.', progress: 75, icon: Leaf, reward: '10 Green Credits', image: "https://placehold.co/600x400", imageHint: "vegetarian meal" },
+    { title: 'Commute Crusader', description: 'Use public transport or cycle to work.', progress: 50, icon: Zap, reward: '20 Green Credits', image: "https://placehold.co/600x400", imageHint: "person cycling" },
+    { title: 'Thrift Shopper', description: 'Buy one second-hand item instead of new.', progress: 100, completed: true, icon: Users, reward: '15 Green Credits', image: "https://placehold.co/600x400", imageHint: "second-hand clothes" },
 ]
 
 const leaderboard = [
@@ -39,8 +40,11 @@ export default function ChallengesPage() {
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                         {challenges.filter(c => !c.completed).map((challenge) => (
                             <Card key={challenge.title}>
-                                <CardHeader>
-                                    <div className="flex items-center gap-3">
+                                <CardHeader className="p-0">
+                                    <div className="relative h-40 w-full rounded-t-lg overflow-hidden">
+                                        <Image src={challenge.image} alt={challenge.title} fill style={{ objectFit: 'cover' }} data-ai-hint={challenge.imageHint} />
+                                    </div>
+                                    <div className="flex items-center gap-3 p-6">
                                         <challenge.icon className="w-8 h-8 text-primary" />
                                         <div>
                                             <CardTitle className="font-headline">{challenge.title}</CardTitle>
@@ -64,8 +68,11 @@ export default function ChallengesPage() {
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                          {challenges.filter(c => c.completed).map((challenge) => (
                             <Card key={challenge.title} className="opacity-70">
-                                <CardHeader>
-                                    <div className="flex items-center gap-3">
+                                 <CardHeader className="p-0">
+                                    <div className="relative h-40 w-full rounded-t-lg overflow-hidden">
+                                        <Image src={challenge.image} alt={challenge.title} fill style={{ objectFit: 'cover' }} data-ai-hint={challenge.imageHint} />
+                                    </div>
+                                    <div className="flex items-center gap-3 p-6">
                                         <challenge.icon className="w-8 h-8 text-muted-foreground" />
                                         <div>
                                             <CardTitle className="font-headline">{challenge.title}</CardTitle>

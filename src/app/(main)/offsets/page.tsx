@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
@@ -41,11 +42,11 @@ export default function OffsetsPage() {
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {offsetProjects.map((project) => (
                     <Card key={project.title} className="flex flex-col h-full">
-                        <CardHeader>
+                        <CardHeader className="p-0">
                             <div className="relative h-40 w-full rounded-t-lg overflow-hidden mb-4">
                                 <Image src={project.image} alt={project.title} fill style={{ objectFit: 'cover' }} data-ai-hint={project.imageHint}/>
                             </div>
-                            <div className="flex items-start gap-4">
+                            <div className="flex items-start gap-4 p-6">
                                 <project.icon className="w-8 h-8 text-primary mt-1 icon-3d" />
                                 <div>
                                     <CardTitle className="font-headline">{project.title}</CardTitle>
