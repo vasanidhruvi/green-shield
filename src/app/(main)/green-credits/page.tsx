@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Award, Briefcase, Download, Feather, Handshake, Sprout, Zap, ShieldCheck, FileText, Building2 } from 'lucide-react'
@@ -13,9 +14,14 @@ const partnerLogos = [
 export default function GreenCreditsPage() {
     return (
         <div className="flex flex-col gap-8">
-            <header>
-                <h1 className="text-3xl font-bold font-headline">Green Credits Programme</h1>
-                <p className="text-muted-foreground">Turn your sustainable actions into tangible rewards and real-world impact.</p>
+            <header className="relative w-full h-48 rounded-lg overflow-hidden">
+                <Image src="https://placehold.co/1200x400" alt="Green forest" fill style={{ objectFit: 'cover' }} data-ai-hint="green forest" />
+                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                    <div className="text-center text-white p-4">
+                        <h1 className="text-3xl font-bold font-headline">Green Credits Programme</h1>
+                        <p className="text-white/90">Turn your sustainable actions into tangible rewards and real-world impact.</p>
+                    </div>
+                </div>
             </header>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

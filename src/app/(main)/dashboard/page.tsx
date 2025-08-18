@@ -3,6 +3,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
+import Image from 'next/image'
 import {
   Card,
   CardContent,
@@ -57,7 +58,7 @@ export default function DashboardPage() {
     setGreenCredits(Math.floor(Math.random() * 500) + 50);
   }, []);
 
-  const treeGrowth = Math.min((totalFootprint / 100) * 100, 100) // Example growth logic
+  const treeGrowth = Math.min((greenCredits / 500) * 100, 100) 
 
   return (
     <div className="flex flex-col gap-6">
@@ -147,32 +148,36 @@ export default function DashboardPage() {
         </Card>
         
         <div className="lg:col-span-2 space-y-6">
-            <Card className="backdrop-blur-sm">
-                <CardHeader>
-                <CardTitle className="font-headline">Your Eco-Garden</CardTitle>
-                <CardDescription>
-                    Your actions help our planet flourish. Watch your tree grow!
-                </CardDescription>
+            <Card className="backdrop-blur-sm overflow-hidden">
+                <CardHeader className="relative z-10">
+                    <CardTitle className="font-headline">Your Eco-Garden</CardTitle>
+                    <CardDescription>
+                        Your actions help our planet flourish. Watch your tree grow!
+                    </CardDescription>
                 </CardHeader>
-                <CardContent className="flex flex-col sm:flex-row items-center gap-6">
-                <div className="relative w-32 h-32 flex items-center justify-center">
-                    <TreePine
-                    className="w-24 h-24 text-primary transition-all duration-1000"
-                    style={{
-                        opacity: 0.3 + (treeGrowth / 100) * 0.7,
-                        transform: `scale(${0.8 + (treeGrowth / 100) * 0.2})`,
-                        filter: `drop-shadow(0 0 15px hsl(var(--primary)))`,
-                    }}
-                    />
-                </div>
-                <div className="flex-1 w-full">
-                    <p className="font-semibold mb-1">Tree Growth</p>
-                    <Progress value={treeGrowth} className="w-full h-3" />
-                    <p className="text-sm text-muted-foreground mt-2">
-                    {treeGrowth.toFixed(0)}% to next level. Keep up the great
-                    work!
-                    </p>
-                </div>
+                <CardContent className="flex flex-col sm:flex-row items-center gap-6 relative">
+                    <div className="absolute inset-0">
+                         <Image src="https://placehold.co/600x400" alt="Eco garden background" fill style={{objectFit: "cover"}} className="opacity-20" data-ai-hint="lush nature" />
+                         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+                    </div>
+                    <div className="relative w-32 h-32 flex items-center justify-center z-10">
+                        <TreePine
+                        className="w-24 h-24 text-primary transition-all duration-1000"
+                        style={{
+                            opacity: 0.3 + (treeGrowth / 100) * 0.7,
+                            transform: `scale(${0.8 + (treeGrowth / 100) * 0.2})`,
+                            filter: `drop-shadow(0 0 15px hsl(var(--primary)))`,
+                        }}
+                        />
+                    </div>
+                    <div className="flex-1 w-full z-10">
+                        <p className="font-semibold mb-1">Tree Growth</p>
+                        <Progress value={treeGrowth} className="w-full h-3" />
+                        <p className="text-sm text-muted-foreground mt-2">
+                        {treeGrowth.toFixed(0)}% to next level. Keep up the great
+                        work!
+                        </p>
+                    </div>
                 </CardContent>
             </Card>
 
