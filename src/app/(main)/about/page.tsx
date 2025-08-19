@@ -18,22 +18,22 @@ export default function AboutUsPage() {
 
       <Card>
         <CardHeader>
-            <CardTitle className="font-headline">Our Mission</CardTitle>
+            <CardTitle className="font-headline">What We Do</CardTitle>
         </CardHeader>
         <CardContent>
-            <p className="text-lg text-muted-foreground">
-                Our mission is to make sustainable living accessible and rewarding for everyone. We believe that collective small actions can lead to significant global impact. Green Shield provides the tools, knowledge, and community support to empower individuals to take control of their environmental footprint and build a healthier planet for future generations.
+            <p className="text-muted-foreground">
+                Our project helps individuals and organizations measure their carbon footprint, take steps to reduce emissions, and offset the rest through verified, sustainable projects. From renewable energy to reforestation, we connect you with real solutions that make a difference.
             </p>
         </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
-            <CardTitle className="font-headline">What We Do</CardTitle>
+            <CardTitle className="font-headline">Our Mission</CardTitle>
         </CardHeader>
         <CardContent>
-            <p className="text-muted-foreground">
-                Our project helps individuals and organizations measure their carbon footprint, take steps to reduce emissions, and offset the rest through verified, sustainable projects. From renewable energy to reforestation, we connect you with real solutions that make a difference.
+            <p className="text-lg text-muted-foreground">
+                Our mission is to make sustainable living accessible and rewarding for everyone. We believe that collective small actions can lead to significant global impact. Green Shield provides the tools, knowledge, and community support to empower individuals to take control of their environmental footprint and build a healthier planet for future generations.
             </p>
         </CardContent>
       </Card>
