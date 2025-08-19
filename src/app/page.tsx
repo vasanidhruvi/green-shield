@@ -19,11 +19,7 @@ export default function LandingPage() {
 
       <main className="flex-1 flex items-center justify-center p-4">
         <section className="text-center max-w-4xl mx-auto">
-            <div className="relative w-full max-w-4xl aspect-[2/1] mx-auto rounded-lg overflow-hidden mb-8 border shadow-lg">
-                <Image src="https://placehold.co/1200x600" alt="Eco-friendly illustration" fill style={{ objectFit: 'cover' }} data-ai-hint="sustainable living nature" />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-            </div>
-
+            
           <h1 className="text-4xl md:text-5xl font-bold font-headline">
             Take Control of Your Environmental Impact
           </h1>
