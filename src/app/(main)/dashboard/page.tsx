@@ -25,6 +25,7 @@ import {
   TreePine,
   ArrowRight,
   Award,
+  Info
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
@@ -63,6 +64,18 @@ export default function DashboardPage() {
 
   return (
     <div className="flex flex-col gap-6">
+      <Card>
+        <CardHeader className="flex-row items-center gap-4">
+          <Info className="w-8 h-8 text-primary" />
+          <div>
+            <CardTitle className="font-headline">What is Carbon Reduction & Offset?</CardTitle>
+            <CardDescription className="max-w-4xl">
+              Carbon reduction means cutting down greenhouse gas emissions by using cleaner energy, improving efficiency, and adopting sustainable practices. Carbon offset means balancing out the emissions we can’t avoid by supporting projects that remove or reduce carbon from the atmosphere, like tree planting or renewable energy.
+            </CardDescription>
+          </div>
+        </CardHeader>
+      </Card>
+      
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <CarbonCalculator />
           <div className="space-y-6">
