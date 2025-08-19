@@ -35,64 +35,62 @@ export default function LandingPage() {
         </div>
 
         <div className="w-full max-w-3xl mt-12">
-             <div className="bg-white/30 backdrop-blur-sm p-8 md:p-12 rounded-2xl shadow-lg border border-white/40">
-                <section className="space-y-6 text-left text-green-900/80">
-                    <h2 className="text-3xl font-bold font-headline text-green-900 text-center">
-                       About Us
-                    </h2>
-                    <p>
-                        We are a team dedicated to driving positive climate action by making carbon reduction and offsetting simple, transparent, and impactful.
-                    </p>
+            <section className="space-y-6 text-left text-green-900/80 p-8 md:p-12">
+                <h2 className="text-3xl font-bold font-headline text-green-900 text-center">
+                    About Us
+                </h2>
+                <p>
+                    We are a team dedicated to driving positive climate action by making carbon reduction and offsetting simple, transparent, and impactful.
+                </p>
 
-                    <div>
-                        <h3 className="text-2xl font-semibold font-headline text-green-900 mb-2">What We Do</h3>
-                        <p>Our project helps individuals and organizations measure their carbon footprint, take steps to reduce emissions, and offset the rest through verified, sustainable projects. From renewable energy to reforestation, we connect you with real solutions that make a difference.</p>
-                    </div>
+                <div>
+                    <h3 className="text-2xl font-semibold font-headline text-green-900 mb-2">What We Do</h3>
+                    <p>Our project helps individuals and organizations measure their carbon footprint, take steps to reduce emissions, and offset the rest through verified, sustainable projects. From renewable energy to reforestation, we connect you with real solutions that make a difference.</p>
+                </div>
 
-                    <div>
-                        <h3 className="text-2xl font-semibold font-headline text-green-900 mb-2">Our Aim</h3>
-                        <p>Our mission is to support the global transition to a low-carbon future. By empowering people and businesses with the right tools and knowledge, we aim to make sustainability accessible, achievable, and measurable.</p>
-                    </div>
-                    
-                    <div>
-                        <h3 className="text-2xl font-semibold font-headline text-green-900 mb-2">Our Values</h3>
-                        <div className="grid sm:grid-cols-2 gap-4 mt-4">
-                            <div className="flex items-start gap-3">
-                                <BarChart className="w-5 h-5 text-primary mt-1 flex-shrink-0"/>
-                                <div>
-                                    <h4 className="font-bold">Transparency</h4>
-                                    <p className="text-sm">Clear and trustworthy data to track progress.</p>
-                                </div>
+                <div>
+                    <h3 className="text-2xl font-semibold font-headline text-green-900 mb-2">Our Aim</h3>
+                    <p>Our mission is to support the global transition to a low-carbon future. By empowering people and businesses with the right tools and knowledge, we aim to make sustainability accessible, achievable, and measurable.</p>
+                </div>
+                
+                <div>
+                    <h3 className="text-2xl font-semibold font-headline text-green-900 mb-2">Our Values</h3>
+                    <div className="grid sm:grid-cols-2 gap-4 mt-4">
+                        <div className="flex items-start gap-3">
+                            <BarChart className="w-5 h-5 text-primary mt-1 flex-shrink-0"/>
+                            <div>
+                                <h4 className="font-bold">Transparency</h4>
+                                <p className="text-sm">Clear and trustworthy data to track progress.</p>
                             </div>
-                            <div className="flex items-start gap-3">
-                                <Target className="w-5 h-5 text-primary mt-1 flex-shrink-0"/>
-                                <div>
-                                    <h4 className="font-bold">Impact</h4>
-                                    <p className="text-sm">Focused on projects that create lasting environmental benefits.</p>
-                                </div>
+                        </div>
+                        <div className="flex items-start gap-3">
+                            <Target className="w-5 h-5 text-primary mt-1 flex-shrink-0"/>
+                            <div>
+                                <h4 className="font-bold">Impact</h4>
+                                <p className="text-sm">Focused on projects that create lasting environmental benefits.</p>
                             </div>
-                            <div className="flex items-start gap-3">
-                                <Handshake className="w-5 h-5 text-primary mt-1 flex-shrink-0"/>
-                                <div>
-                                    <h4 className="font-bold">Collaboration</h4>
-                                    <p className="text-sm">Building a greener future together.</p>
-                                </div>
+                        </div>
+                        <div className="flex items-start gap-3">
+                            <Handshake className="w-5 h-5 text-primary mt-1 flex-shrink-0"/>
+                            <div>
+                                <h4 className="font-bold">Collaboration</h4>
+                                <p className="text-sm">Building a greener future together.</p>
                             </div>
-                            <div className="flex items-start gap-3">
-                                <Zap className="w-5 h-5 text-primary mt-1 flex-shrink-0"/>
-                                <div>
-                                    <h4 className="font-bold">Innovation</h4>
-                                    <p className="text-sm">Using smart solutions to tackle climate challenges.</p>
-                                </div>
+                        </div>
+                        <div className="flex items-start gap-3">
+                            <Zap className="w-5 h-5 text-primary mt-1 flex-shrink-0"/>
+                            <div>
+                                <h4 className="font-bold">Innovation</h4>
+                                <p className="text-sm">Using smart solutions to tackle climate challenges.</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <p className="text-center pt-4 italic">
-                        Together, we believe every step—big or small—brings us closer to a sustainable, net-zero world.
-                    </p>
-                </section>
-            </div>
+                </div>
+                
+                <p className="text-center pt-4 italic">
+                    Together, we believe every step—big or small—brings us closer to a sustainable, net-zero world.
+                </p>
+            </section>
         </div>
 
       <footer className="py-8 mt-8 text-center text-sm text-green-800/60 w-full">
