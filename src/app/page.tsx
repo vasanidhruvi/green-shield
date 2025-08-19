@@ -8,14 +8,7 @@ import { ArrowRight } from 'lucide-react'
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <header className="p-4 md:p-6 flex justify-between items-center">
-        <Logo />
-        <Button asChild variant="ghost">
-          <Link href="/dashboard">
-            Sign In
-          </Link>
-        </Button>
-      </header>
+      
 
       <main className="flex-1 flex items-center justify-center p-4">
         <section className="text-center max-w-4xl mx-auto">
