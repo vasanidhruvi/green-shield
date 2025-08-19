@@ -81,12 +81,12 @@ function MainSidebar() {
         <Sidebar>
         <SidebarHeader>
           <div className="flex items-center justify-between">
-            <div className="group-data-[collapsible=icon]:hidden">
+            <Link href="/" className="group-data-[collapsible=icon]:hidden">
                 <Logo />
-            </div>
-            <div className="hidden group-data-[collapsible=icon]:block">
+            </Link>
+            <Link href="/" className="hidden group-data-[collapsible=icon]:block">
               <Leaf className="h-6 w-6 text-primary"/>
-            </div>
+            </Link>
             <SidebarTrigger className="hidden md:inline-flex" />
           </div>
         </SidebarHeader>
