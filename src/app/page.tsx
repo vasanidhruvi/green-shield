@@ -3,7 +3,7 @@
 
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { ArrowRight, Leaf, BarChart, Handshake, Target, Zap } from 'lucide-react'
+import { ArrowRight, BarChart, Handshake, Target, Zap } from 'lucide-react'
 import * as React from 'react'
 
 export default function LandingPage() {
