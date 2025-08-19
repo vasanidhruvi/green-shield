@@ -6,11 +6,6 @@ import Image from "next/image";
 export default function AboutUsPage() {
   return (
     <div className="flex flex-col gap-8">
-      <header>
-          <h1 className="text-3xl font-bold font-headline">About Green Shield</h1>
-          <p className="text-muted-foreground">Empowering a sustainable future, one action at a time.</p>
-      </header>
-
       <Card>
         <CardHeader>
             <CardTitle className="font-headline">What We Do</CardTitle>
