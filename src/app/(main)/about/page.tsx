@@ -27,6 +27,17 @@ export default function AboutUsPage() {
         </CardContent>
       </Card>
 
+      <Card>
+        <CardHeader>
+            <CardTitle className="font-headline">What We Do</CardTitle>
+        </CardHeader>
+        <CardContent>
+            <p className="text-muted-foreground">
+                Our project helps individuals and organizations measure their carbon footprint, take steps to reduce emissions, and offset the rest through verified, sustainable projects. From renewable energy to reforestation, we connect you with real solutions that make a difference.
+            </p>
+        </CardContent>
+      </Card>
+
       <div className="grid md:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
