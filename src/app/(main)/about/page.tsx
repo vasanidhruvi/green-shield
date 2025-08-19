@@ -1,15 +1,7 @@
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Handshake, Rocket, Target } from "lucide-react";
 import Image from "next/image";
-
-const teamMembers = [
-    { name: "Alex Green", role: "Founder & CEO", avatar: "https://placehold.co/150x150", imageHint: "person portrait" },
-    { name: "Brianna Eco", role: "Head of Sustainability", avatar: "https://placehold.co/150x150", imageHint: "person portrait" },
-    { name: "Charlie Bloom", role: "Lead Developer", avatar: "https://placehold.co/150x150", imageHint: "person portrait" },
-    { name: "Diana Waters", role: "Community Manager", avatar: "https://placehold.co/150x150", imageHint: "person portrait" },
-]
 
 export default function AboutUsPage() {
   return (
@@ -80,26 +72,6 @@ export default function AboutUsPage() {
             </div>
         </CardContent>
        </Card>
-
-      <Card>
-        <CardHeader>
-            <CardTitle className="font-headline">Meet the Team</CardTitle>
-            <CardDescription>The passionate individuals behind Green Shield.</CardDescription>
-        </CardHeader>
-        <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {teamMembers.map(member => (
-                <div key={member.name} className="flex flex-col items-center text-center">
-                    <Avatar className="w-20 h-20 mb-2">
-                        <AvatarImage src={member.avatar} data-ai-hint={member.imageHint} />
-                        <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                    <h3 className="font-semibold">{member.name}</h3>
-                    <p className="text-sm text-primary">{member.role}</p>
-                </div>
-            ))}
-        </CardContent>
-      </Card>
-
     </div>
   );
 }
