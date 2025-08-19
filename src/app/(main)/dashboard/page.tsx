@@ -28,6 +28,7 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
+import { CarbonCalculator } from './carbon-calculator';
 
 const footprintCategories = [
   { category: 'Transport', color: 'hsl(var(--chart-1))', icon: Car },
@@ -71,53 +72,59 @@ export default function DashboardPage() {
         </p>
       </header>
 
-      <Card className="bg-primary/5 border-primary/20 backdrop-blur-sm">
-        <CardHeader>
-          <div className="flex items-center gap-4">
-            <ShieldCheck className="w-10 h-10 text-primary" />
-            <div>
-              <CardTitle className="font-headline text-primary">
-                Your Eco-Hero Status
-              </CardTitle>
-              <CardDescription>
-                Your current stats at a glance.
-              </CardDescription>
-            </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <CarbonCalculator />
+          <div className="space-y-6">
+            <Card className="bg-primary/5 border-primary/20 backdrop-blur-sm">
+                <CardHeader>
+                <div className="flex items-center gap-4">
+                    <ShieldCheck className="w-10 h-10 text-primary" />
+                    <div>
+                    <CardTitle className="font-headline text-primary">
+                        Your Eco-Hero Status
+                    </CardTitle>
+                    <CardDescription>
+                        Your current stats at a glance.
+                    </CardDescription>
+                    </div>
+                </div>
+                </CardHeader>
+                <CardContent>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                    <div className="p-4 rounded-lg bg-background/70">
+                    <Leaf className="h-6 w-6 text-primary mx-auto mb-2" />
+                    <p className="text-xl md:text-2xl font-bold">{totalFootprint} kg</p>
+                    <p className="text-xs text-muted-foreground">
+                        This Month's CO₂e
+                    </p>
+                    </div>
+                    <div className="p-4 rounded-lg bg-background/70">
+                    <Award className="h-6 w-6 text-yellow-600 mx-auto mb-2" />
+                    <p className="text-xl md:text-2xl font-bold">{greenCredits}</p>
+                    <p className="text-xs text-muted-foreground">
+                        Green Credits
+                    </p>
+                    </div>
+                    <div className="p-4 rounded-lg bg-background/70">
+                    <Droplets className="h-6 w-6 text-blue-500 mx-auto mb-2" />
+                    <p className="text-xl md:text-2xl font-bold">{offsets} kg</p>
+                    <p className="text-xs text-muted-foreground">
+                        Offsets Purchased
+                    </p>
+                    </div>
+                    <div className="p-4 rounded-lg bg-background/70">
+                    <Zap className="h-6 w-6 text-yellow-500 mx-auto mb-2" />
+                    <p className="text-xl md:text-2xl font-bold">{challengeStreak} Days</p>
+                    <p className="text-xs text-muted-foreground">
+                        Challenge Streak
+                    </p>
+                    </div>
+                </div>
+                </CardContent>
+            </Card>
           </div>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-            <div className="p-4 rounded-lg bg-background/70">
-              <Leaf className="h-6 w-6 text-primary mx-auto mb-2" />
-              <p className="text-xl md:text-2xl font-bold">{totalFootprint} kg</p>
-              <p className="text-xs text-muted-foreground">
-                This Month's CO₂e
-              </p>
-            </div>
-            <div className="p-4 rounded-lg bg-background/70">
-              <Award className="h-6 w-6 text-yellow-600 mx-auto mb-2" />
-              <p className="text-xl md:text-2xl font-bold">{greenCredits}</p>
-              <p className="text-xs text-muted-foreground">
-                Green Credits
-              </p>
-            </div>
-            <div className="p-4 rounded-lg bg-background/70">
-              <Droplets className="h-6 w-6 text-blue-500 mx-auto mb-2" />
-              <p className="text-xl md:text-2xl font-bold">{offsets} kg</p>
-              <p className="text-xs text-muted-foreground">
-                Offsets Purchased
-              </p>
-            </div>
-            <div className="p-4 rounded-lg bg-background/70">
-              <Zap className="h-6 w-6 text-yellow-500 mx-auto mb-2" />
-              <p className="text-xl md:text-2xl font-bold">{challengeStreak} Days</p>
-              <p className="text-xs text-muted-foreground">
-                Challenge Streak
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      </div>
+
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="flex-1 flex flex-col backdrop-blur-sm lg:col-span-1">
@@ -157,7 +164,7 @@ export default function DashboardPage() {
                 </CardHeader>
                 <CardContent className="flex flex-col sm:flex-row items-center gap-6 relative">
                     <div className="absolute inset-0">
-                         <Image src="https://placehold.co/600x400" alt="Eco garden background" fill style={{objectFit: "cover"}} className="opacity-20" data-ai-hint="lush nature" />
+                         <Image src="https://placehold.co/600x400.png" alt="Eco garden background" fill style={{objectFit: "cover"}} className="opacity-20" data-ai-hint="lush nature" />
                          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
                     </div>
                     <div className="relative w-32 h-32 flex items-center justify-center z-10">
