@@ -39,7 +39,7 @@ export default function LandingPage() {
                 <section className="text-center">
                     <Leaf className="w-10 h-10 text-primary mx-auto mb-4"/>
                     <h2 className="text-3xl font-bold font-headline text-green-900 mb-4">
-                        What is Green Shield?
+                        What is Carbon Reduction & Offset?
                     </h2>
                     <p className="text-lg text-green-800/80 max-w-2xl mx-auto">
                         Our project helps you measure your carbon footprint, take steps to reduce emissions, and offset the rest through verified, sustainable projects. From renewable energy to reforestation, we connect you with real solutions that make a difference.
