@@ -27,25 +27,14 @@ export default function AboutUsPage() {
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-            <CardTitle className="font-headline">Our Mission</CardTitle>
-        </CardHeader>
-        <CardContent>
-            <p className="text-lg text-muted-foreground">
-                Our mission is to make sustainable living accessible and rewarding for everyone. We believe that collective small actions can lead to significant global impact. Green Shield provides the tools, knowledge, and community support to empower individuals to take control of their environmental footprint and build a healthier planet for future generations.
-            </p>
-        </CardContent>
-      </Card>
-
       <div className="grid md:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle className="font-headline">Our Story</CardTitle>
+            <CardTitle className="font-headline">Our Mission</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground">
-                Green Shield was born from a simple idea: what if we could use technology to make sustainability a part of everyone's daily life? Frustrated by the complexity of understanding carbon footprints and the lack of engaging tools, our founders set out to build a platform that was not only informative but also fun and motivating. We started as a small team of passionate environmentalists and tech enthusiasts, and have grown into a community dedicated to driving positive change.
+                Our mission is to make sustainable living accessible and rewarding for everyone. We believe that collective small actions can lead to significant global impact. Green Shield provides the tools, knowledge, and community support to empower individuals to take control of their environmental footprint and build a healthier planet for future generations.
             </p>
           </CardContent>
         </Card>
