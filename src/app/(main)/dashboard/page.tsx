@@ -63,15 +63,6 @@ export default function DashboardPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <header>
-        <h1 className="text-2xl md:text-3xl font-bold font-headline">
-          Welcome back, Eco-Hero!
-        </h1>
-        <p className="text-muted-foreground">
-          See your positive impact and continue your green journey.
-        </p>
-      </header>
-
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <CarbonCalculator />
           <div className="space-y-6">
