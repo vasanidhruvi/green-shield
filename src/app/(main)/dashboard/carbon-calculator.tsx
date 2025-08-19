@@ -267,21 +267,21 @@ export function CarbonCalculator() {
             <TabsContent value="shopping" className="pt-4">
                 <div className="space-y-4">
                     <div className="space-y-2">
-                        <Label htmlFor="goods-spending">Monthly spending on goods ($)</Label>
+                        <Label htmlFor="goods-spending">Monthly spending on goods (₹)</Label>
                         <Input
                             id="goods-spending"
                             type="number"
-                            placeholder="e.g., 300 (clothing, electronics, furniture)"
+                            placeholder="e.g., 25000 (clothing, electronics, furniture)"
                             value={goodsSpending}
                             onChange={(e) => setGoodsSpending(e.target.value)}
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="services-spending">Monthly spending on services ($)</Label>
+                        <Label htmlFor="services-spending">Monthly spending on services (₹)</Label>
                         <Input
                             id="services-spending"
                             type="number"
-                            placeholder="e.g., 150 (entertainment, healthcare, education)"
+                            placeholder="e.g., 12000 (entertainment, healthcare, education)"
                             value={servicesSpending}
                             onChange={(e) => setServicesSpending(e.target.value)}
                         />
