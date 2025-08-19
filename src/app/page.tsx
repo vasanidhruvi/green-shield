@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { ArrowRight, BarChart, Handshake, Target, Zap } from 'lucide-react'
 import * as React from 'react'
+import { Separator } from '@/components/ui/separator'
 
 export default function LandingPage() {
 
@@ -42,6 +43,7 @@ export default function LandingPage() {
                 <p>
                     We are a team dedicated to driving positive climate action by making carbon reduction and offsetting simple, transparent, and impactful.
                 </p>
+                <Separator className="w-1/4 mx-auto" />
 
                 <div>
                     <h3 className="text-2xl font-semibold font-headline text-green-900 mb-2">What We Do</h3>
