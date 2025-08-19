@@ -4,44 +4,16 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { motion, useMotionValue, useTransform } from 'framer-motion'
 import * as React from 'react'
 
 export default function LandingPage() {
-    const x = useMotionValue(200);
-    const y = useMotionValue(200);
-
-    const rotateX = useTransform(y, [0, 400], [10, -10]);
-    const rotateY = useTransform(x, [0, 400], [-10, 10]);
-
-    function handleMouse(event: React.MouseEvent) {
-        const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
-        x.set(event.clientX - rect.left);
-        y.set(event.clientY - rect.top);
-    }
 
   return (
     <div className="relative flex flex-col min-h-screen bg-green-50 items-center justify-center p-4">
-        <motion.div
-            style={{
-                width: '100%',
-                maxWidth: '48rem',
-                display: 'flex',
-                placeItems: 'center',
-                placeContent: 'center',
-                perspective: 400,
-            }}
-            onMouseMove={handleMouse}
-            onMouseLeave={() => {
-                x.set(200)
-                y.set(200)
-            }}
+        <div
+            className="w-full max-w-3xl"
         >
-            <motion.div
-                style={{
-                    rotateX: rotateX,
-                    rotateY: rotateY,
-                }}
+            <div
                 className="bg-white/30 backdrop-blur-sm p-8 md:p-12 rounded-2xl shadow-lg border border-white/40"
             >
                 <section className="text-center">
@@ -59,8 +31,8 @@ export default function LandingPage() {
                         </Button>
                     </div>
                 </section>
-            </motion.div>
-        </motion.div>
+            </div>
+        </div>
 
       <footer className="absolute bottom-0 p-4 text-center text-sm text-green-800/60 w-full">
         © {new Date().getFullYear()} Green Shield. All Rights Reserved.
