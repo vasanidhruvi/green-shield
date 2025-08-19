@@ -4,7 +4,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Recycle, Sparkles, Trophy, Users, Leaf, Award, ChevronDown, Info } from "lucide-react"
+import { Home, Recycle, Sparkles, Trophy, Users, Leaf, Award, ChevronDown } from "lucide-react"
 import { AnimatePresence, motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
@@ -39,7 +39,6 @@ const navItems = [
   { href: "/offsets", icon: Recycle, label: "Offsets" },
   { href: "/eco-tips", icon: Sparkles, label: "Eco-Tips" },
   { href: "/community", icon: Users, label: "Community" },
-  { href: "/about", icon: Info, label: "About Us" },
 ];
 
 function MainHeader() {
