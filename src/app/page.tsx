@@ -3,7 +3,7 @@
 
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Leaf } from 'lucide-react'
 import * as React from 'react'
 
 export default function LandingPage() {
@@ -30,6 +30,20 @@ export default function LandingPage() {
                             </Link>
                         </Button>
                     </div>
+                </section>
+            </div>
+        </div>
+
+        <div className="w-full max-w-3xl mt-12">
+             <div className="bg-white/30 backdrop-blur-sm p-8 md:p-12 rounded-2xl shadow-lg border border-white/40">
+                <section className="text-center">
+                    <Leaf className="w-10 h-10 text-primary mx-auto mb-4"/>
+                    <h2 className="text-3xl font-bold font-headline text-green-900 mb-4">
+                        What is Green Shield?
+                    </h2>
+                    <p className="text-lg text-green-800/80 max-w-2xl mx-auto">
+                        Our project helps you measure your carbon footprint, take steps to reduce emissions, and offset the rest through verified, sustainable projects. From renewable energy to reforestation, we connect you with real solutions that make a difference.
+                    </p>
                 </section>
             </div>
         </div>
