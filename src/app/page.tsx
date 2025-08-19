@@ -21,7 +21,7 @@ export default function LandingPage() {
         <section className="text-center max-w-4xl mx-auto">
             
           <h1 className="text-4xl md:text-5xl font-bold font-headline">
-            Take Control of Your Environmental Impact
+            Green Shield
           </h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Green Shield empowers you to understand, track, and reduce your carbon footprint through personalized insights, engaging challenges, and a supportive community.
